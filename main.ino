@@ -21,18 +21,18 @@ const bool DEBUG = true; // Faz testes usando o led local do arduino e retorna m
     //--- Conectores PCA9685
 
 #define porta_extensor_A 0x40 //Pino analogico do arduino p/ conexão IC2
-//#define saida_extensor_B = 0x41 // Pino analogico, eu acho que é o 41
+//#define saida_extensor_B = 0x41 // Pino analogico, eu acho que é o
 
-#define max_frequency_PCA 1600
+#define max_freq 1600 // frequência máxima do PCA
 
-#define extensor_liga_max 4095 // 4095 é o valor de frequencia para deixar o mais aceso possível
-#define extensor_desliga 4096 // 4096 é o valor do led desligado completo
-                                // setPWM(pin, 0, 4096) = setPWM(pin, 0, extensor_desliga)
+#define brilho_max 4095 // 4095 é o valor de frequencia para deixar o mais aceso possível
+#define sem_brilho 4096 // 4096 é o valor do led desligado completo
+                                // setPWM(pin, 0, 4096) = setPWM(pin, 0, sem_brilho)
                                 // https://learn.adafruit.com/16-channel-pwm-servo-driver/faq
 
 
-Adafruit_PWMServoDriver pwm1 = Adafruit_PWMServoDriver(porta_extensor_A); // endereço do IC2
-//Adafruit_PWMServoDriver pwm2 = Adafruit_PWMServoDriver(saida_extensor_B); // endereço do IC2
+Adafruit_PWMServoDriver pca_1 = Adafruit_PWMServoDriver(porta_extensor_A); // endereço do IC2
+//Adafruit_PWMServoDriver pca_2 = Adafruit_PWMServoDriver(saida_extensor_B); // endereço do IC2
 
     // Variáveis de estado
 
@@ -45,10 +45,10 @@ void setup(){
     //--- Conectores PCA9685 
 
     Wire.begin(); // biblioteca do wire rodando.
-    pwm1.begin();
-    //pwm2.begin();
-    pwm1.setPWMFreq(max_frequency_PCA); // Set the PWM frequency (e.g., 1000 = 1000Hz) 1000 seria 25% da potencia
-    //pwm2.setPWMFreq(1000); // pode usar o max_frequency_PCA aqui.
+    pca_1.begin();
+    //pca_2.begin();
+    pca_1.setPWMFreq(max_freq); // Set the PWM frequency (e.g., 1000 = 1000Hz) 1000 seria 25% da potencia
+    //pca_2.setPWMFreq(1000); // pode usar o max_freq aqui.
 
     //--- Inicializando catalogo de leds
 
@@ -59,10 +59,10 @@ void setup(){
 
 void loop(){
     //delay(500);
-    pwm1.setPWM(0, 0, max_frequency_PCA);
+    pca_1.setPWM(0, 0, max_freq);
     delay(1000);
-    //pwm1.setPWM(0, 0, 1000);
-    pwm1.setPWM(0, 0, extensor_desliga);
+    //pca_1.setPWM(0, 0, 1000);
+    pca_1.setPWM(0, 0, sem_brilho);
 
     debug_blink(50);
 
@@ -84,7 +84,7 @@ void loop(){
 
 
 void led_test(int channel){
-    //pwm1.setPWM(channel, 0, 4095); // endereço, tempo do ciiclo pra ligar, ou algo assim, 
+    //pca_1.setPWM(channel, 0, 4095); // endereço, tempo do ciiclo pra ligar, ou algo assim, 
 }
 
 void debug_blink(int time){
