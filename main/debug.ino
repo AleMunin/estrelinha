@@ -22,3 +22,7 @@ void debug_solo(int espera){  //Gradualmente ascende o led solo da porta 3.
     delay(espera); // Delay for a smoother transition
   }
 }
+
+void boot(){ // Rotina quando está o set up.
+
+}

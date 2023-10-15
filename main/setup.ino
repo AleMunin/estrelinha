@@ -3,11 +3,13 @@ void setup(){
   Serial.begin(9600);
 
   Wire.begin(); // biblioteca do wire rodando para identificar os PCA
-  pca_1.begin();
-  pca_1.setPWMFreq(max_freq);
+  //pca_1.begin();
+  //pca_1.setPWMFreq(max_freq); // n precisa da frequencia maxima, mas
 
-  short n_pca = num_placas;
-  short n_led = leds_por_placas;
+  pwm[0].begin();
+  pwm[0].setPWMFreq(max_freq); // n precisa da frequencia maxima, mas
+
+  
 
   if (BEEP){ //Se há um buzzer
     pinMode(buzzer_pin, OUTPUT);
@@ -27,14 +29,6 @@ void setup(){
 *   Caso queira expandir para mais placas, se preocupe não com os contadores aqui mas com a declaração de Adafruit_PWMServoDriver,
 *   onde a placa e a saida precisam ser declaradas.
 */
-
-  bool led_ligado[n_pca][n_led]; // Catalogo de leds ligados false = desligado, true = ligado. 
-  unsigned long int led_Timer[n_pca][n_led] = {}; //milisegundos
-  int led_Timer_H[n_pca][n_led] = {}; //Horas logadas dele ligado (resetará ao chegar em 721)
-  int16_t led_Timer_D[n_pca][n_led] = {}; // Dias logados (resetará ao chegar em 31)
-  int16_t led_Timer_S[n_pca][n_led] = {}; // Semanas logadas (resetará ao chegar em 5)
-
-
 
 }
 

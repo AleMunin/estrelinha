@@ -25,6 +25,9 @@ bool solo_led = true; // Se houver um led como estrela ele tem que ser confirmad
 #define porta_extensor_A 0x40 //Pino analogico do arduino p/ conexão IC2
 #define porta_extensor_B 0x41 // Pino analogico, eu acho que é o
 
+const int n_pca = num_placas;
+const int n_led = leds_por_placas;
+
 #define max_freq 1600 // frequência máxima do PCA
 
 #define brilho_max 4095 // 4095 é o valor de frequencia para deixar o mais aceso possível
@@ -34,8 +37,8 @@ bool solo_led = true; // Se houver um led como estrela ele tem que ser confirmad
   Source: https://learn.adafruit.com/16-channel-pwm-servo-driver/faq
 */
 
-Adafruit_PWMServoDriver pca_1 = Adafruit_PWMServoDriver(porta_extensor_A); // endereço do IC2
-
+//Adafruit_PWMServoDriver pca_1 = Adafruit_PWMServoDriver(); // endereço do IC2 não é necessário, ao contrário de alguns exemplos.
+Adafruit_PWMServoDriver pwm[] = { Adafruit_PWMServoDriver(0x40) };
 
 //------------------------- ESTADOS DA MAQUINA ------------------------- \\
 
@@ -56,5 +59,11 @@ enum TEMPO_MAX { //Estado da máquina que define o tempo máximo de brilho.
 
 const TEMPO_MAX modo_tempo = SEGUNDOS_30;
 bool TODOS_LIGADOS = false; // Marca true se todos os leds no catálogo estão acesos
+
+bool led_ligado[n_pca][n_led] = {}; // Catalogo de leds ligados false = desligado, true = ligado. 
+unsigned long int led_Timer[n_pca][n_led] = {}; //milisegundos
+short led_Timer_H[n_pca][n_led] = {}; //Horas logadas dele ligado (resetará ao chegar em 721)
+short led_Timer_D[n_pca][n_led] = {}; // Dias logados (resetará ao chegar em 31)
+short led_Timer_S[n_pca][n_led] = {}; // Semanas logadas (resetará ao chegar em 5)
 
 

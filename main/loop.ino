@@ -6,10 +6,16 @@ void loop(){
   Serial.println("This is some bull bullshit");
 
   Serial.println("I'm tired and horny");
-  pca_1.setPWM(0, 0, max_freq);
+  //pca_1.setPWM(0, 0, max_freq);
+  //pwm[0].setPWM(0, 0, max_freq);
+
+  liga_led(0, 0, false);
+
+ 
   delay(1000);
   //pca_1.setPWM(0, 0, 1000);
-  pca_1.setPWM(0, 0, sem_brilho);
+  //pwm[0].setPWM(0, 0, sem_brilho);
+  desliga_led(0, 0, false);
 
   debug_solo(10); // teste do led solo
 
