@@ -9,6 +9,14 @@ void setup(){
   short n_pca = num_placas;
   short n_led = leds_por_placas;
 
+  if (BEEP){ //Se há um buzzer
+    pinMode(buzzer_pin, OUTPUT);
+    
+    dbug basic_buzz(250);
+
+    if(!TESTANDO) twinkle();
+  }
+
   dbug msg("THis is a define test");
 /*  Configuração das array:
 *   Contanto que forem marcados ao construir, o algoritmo não liga se há 1, 2, ou 3 placas aonde diz respeito da array.

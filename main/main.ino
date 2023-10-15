@@ -7,7 +7,7 @@
 
 const bool TESTANDO = true; //Reduz globais de tempo para pequenos periodos.
 const bool DEBUG = true; // Faz testes usando o led local do arduino e retorna msgs de log
-const bool BEEP = false; // caso tenha um buzzer instalado.
+const bool BEEP = true; // caso tenha um buzzer instalado.
 
 #define msg Serial.println //Pq cansa digitar isso
 #define dbug if (DEBUG) //Deixa o código mais limpo
@@ -16,6 +16,7 @@ const bool BEEP = false; // caso tenha um buzzer instalado.
 #define leds_por_placas 1 //Confirme o número de leds no pca. SE NÃO HOUVER PLACAS MARQUE COMO ZERO.
 bool solo_led = true; // Se houver um led como estrela ele tem que ser confirmado a qui
 
+#define buzzer_pin 4 // porta do buzzer.
 
 // ------------------------- Conectores PCA9685 e o LED solo ------------------------- \\
  sempre são inicializados dois =/
