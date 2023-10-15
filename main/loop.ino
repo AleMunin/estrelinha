@@ -1,22 +1,19 @@
 void loop(){
-    //delay(500);
-    pca_1.setPWM(0, 0, max_freq);
-    delay(1000);
-    //pca_1.setPWM(0, 0, 1000);
-    pca_1.setPWM(0, 0, sem_brilho);
+  debug_blink(50, 50);
+  
+  Serial.println("This is running from concatenated files");
+  debug_blink(200, 200);
+  Serial.println("This is some bull bullshit");
 
-    debug_blink(100,50);
+  Serial.println("I'm tired and horny");
+  pca_1.setPWM(0, 0, max_freq);
+  delay(1000);
+  //pca_1.setPWM(0, 0, 1000);
+  pca_1.setPWM(0, 0, sem_brilho);
 
+  debug_solo(10); // teste do led solo
 
-    // Gradually increase the LED brightness
-    for (int brightness = 0; brightness <= 255; brightness++) {
-        analogWrite(ledPin, brightness);
-        delay(10); // Delay for a smoother transition
-    }
-
-    // Gradually decrease the LED brightness
-    for (int brightness = 255; brightness >= 0; brightness--) {
-        analogWrite(ledPin, brightness);
-        delay(10); // Delay for a smoother transition
-    }
+  dbug {
+    msg("THis is a loop define test");
+  }
 }
