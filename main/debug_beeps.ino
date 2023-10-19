@@ -1,6 +1,6 @@
-void basic_buzz(short tempo){ //Buzz basico
+void basic_buzz(short tempo, char text = "Tocando o buzzer"){ //Buzz basico
   if (!BEEP) return void();
-  dbug msg("Tocando o buzzer");
+  dbug msg(text);
   tone(buzzer_pin,261,tempo);
   delay(tempo);
   noTone(buzzer_pin);
