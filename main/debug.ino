@@ -8,6 +8,12 @@ void debug_blink(int time_on, int time_off){ //Usa o led do arduino pra testar s
   delay(time_off);
 }
 
+bool is_solo(short row, short col){ //detecta se é o led solitário
+  if (!solo_led) return false;
+  if ((row == n_pca) && (col == 0)) return true;
+  else return false;
+}
+
 
 void debug_solo(int espera){  //Gradualmente ascende o led solo da porta 3. Does not catalog it
 
@@ -49,4 +55,7 @@ void debug_time(short row, short col){  // lista o tempo do catalogo.
 
 void boot(){ // Rotina quando está o set up.
 
+  debug_solo(10);
+
+  
 }

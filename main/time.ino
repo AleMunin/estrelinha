@@ -1,15 +1,18 @@
-void time_reset_all(short row, short col){ // Reseta todos os timers.
-    led_Timer[row][col] = 0;      // reseta tempo total
 
-    led_Timer_milis[row][col] = 0; // reseta tempo em mili
-    led_Timer_M[row][col] = 0;    // reseta tempo em minutos
-    led_Timer_H[row][col] = 0;    // reseta hora
-    led_Timer_D[row][col] = 0;    // reseta dia
-    led_Timer_S[row][col] = 0;    // reseta semana
+void time_setup(){
+  dbug msg("Dando valor 0 a todos leds");
+  short row =0;
+  short col = 0;
+  for (row=0; row < n_pca; row++){
 
-
-    dbug msg("Timers resetados por time_reset_all");
+    for (col=0; col < n_led; col++){
+      //Até as faixas não existentes precisam ser inicializadas para evitar erros
+      led_ligado[row][col] = false; // registra ele no catalogo
+      time_reset_all(row,col); // Nesse contexto inicializa todos os timers.
+    }
+  }
 }
+
 
 #define UM_MINUTO 60000
 #define UMA_HORA 60 //milisegundos, talvez mudar
@@ -44,67 +47,9 @@ void time_reset_all(short row, short col){ // Reseta todos os timers.
 //O tempo adicionado é baseado num switch usando o timer, todos os switches chamam outra função, passando parametros diferentes
 //os parametros são basicamente esses defines.
 
-void tempo_ligado(){ //Adiciona tempo proporcionalmente se o led estiver ligado
-                    //Talvez não seja necessária, MAS estou deixando esse contador aqui caso seja.
-  short row = 0;
-  short col = 0;
-
-  bool led_placa = false;
-
-  for (row; row <= n_pca; row++){
-
-    for (col; col < n_led; col++){
-
-      if (row == (n_pca - 1) ){  // Se está na ultima fileira "placa" (ou seja, no led interno)
-
-        if (col < 0) break; // não há mais leds. Apenas um na placa.
-
-        if (solo_led){ //checagem pra solo led aqui baseado na const
-          led_placa = true; //diz pra função final que se trata do led do arduino.
-        }
-      }
-
-      if (!led_ligado[row][col]) continue; // pula os desligados
-
-      led_Timer[row][col]++; // Adiciona milisegundos na contagem de quanto tempo total que tá ligado
-      led_Timer_milis[row][col]++;  //Adiciona milisegundos pro contador de relógio
-
-      if (led_Timer_milis[row][col] > UM_MINUTO){ //se o contador de milisegundos atingiu 1h
-        led_Timer_M[row][col]++;
-        led_Timer_milis[row][col] = 0;    // reseta milisegundo
-      }
-
-      if (led_Timer_M[row][col] > UMA_HORA){ //se o contador de minutos atingiu 60
-        led_Timer_H[row][col]++;
-        led_Timer_M[row][col] = 0;    // reseta milisegundo
-      }
-
-      if (led_Timer_H[row][col] > UM_DIA){ //se o contador de horas atingiu 1 dia
-        led_Timer_D[row][col]++;
-        led_Timer_H[row][col] = 0;    // reseta hora
-      }
-
-      if (led_Timer_D[row][col] > UMA_SEMANA){ //se o contador de horas atingiu 1 semana
-        led_Timer_S[row][col]++;
-        led_Timer_D[row][col] = 0;    // reseta dia
-      }
-
-      if (led_Timer_S[row][col] == UM_MES){ //se o contador de horas atingiu 1 mes
-        led_Timer_S[row][col] = 0; // Reseta semana, enquanto n tiver usando o reset_all
-        //time_reset_all(row,col);   // reseta tudo, talvez, ver os troços de tempo total depois voltar aqui
-      }
-
-      checa_tempo(row,col,led_placa);
-    }
-  }
-
-}
 
 void checa_tempo(short row, short col, bool solo_led){
 
-  //Provavelmente compara tempo_permitido com o timer se for usar um switch gigante pro modo tempo
-  //Se o tempo for maior, desliga_led(row, col, true).
-  //Problema é que n da pra adicionar 2 meses, mas dane-se.
   bool tempo_acabou = false;
   
   switch (modo_tempo) {
@@ -118,110 +63,110 @@ void checa_tempo(short row, short col, bool solo_led){
     break;
 
     case SEGUNDOS_10:
-      if ( led_Timer_milis[row][col] > DEZ_SEGUNDOS_M){
-                tempo_acabou = true;
+      if ( led_Timer[row][col] > DEZ_SEGUNDOS_M){
+        tempo_acabou = true;
       }
     break;
 
     case SEGUNDOS_30:
-      if ( led_Timer_milis[row][col] > MEIO_MINUTO_M){
+      if ( led_Timer[row][col] > MEIO_MINUTO_M){
         tempo_acabou = true;
       }
     break;
 
     case MINUTOS_2:
-      if ( led_Timer_milis[row][col] > DOIS_MINUTOS_M){
+      if ( led_Timer[row][col] > DOIS_MINUTOS_M){
         tempo_acabou = true;
       }
     break;
 
     case MINUTOS_15:
-      if ( led_Timer_milis[row][col] > QUINZE_MINUTOS){
+      if ( led_Timer[row][col] > QUINZE_MINUTOS){
         tempo_acabou = true;
       }
     break;
 
     case MINUTOS_30:
-      if ( led_Timer_milis[row][col] > MEIA_HORA_M){
+      if ( led_Timer[row][col] > MEIA_HORA_M){
         tempo_acabou = true;
       }
     break;
 
     case HORAS_1:
-      if ( led_Timer_milis[row][col] > UMA_HORA_M){
+      if ( led_Timer[row][col] > UMA_HORA_M){
         tempo_acabou = true;
       }
     break;
 
     case HORAS_3:
-      if ( led_Timer_milis[row][col] > TRES_HORAS_M){
+      if ( led_Timer[row][col] > TRES_HORAS_M){
         tempo_acabou = true;
       }
     break;
 
     case HORAS_6:
-      if ( led_Timer_milis[row][col] > SEIS_HORAS_M){
+      if ( led_Timer[row][col] > SEIS_HORAS_M){
         tempo_acabou = true;
       }
     break;
 
     case HORAS_12:
-      if ( led_Timer_milis[row][col] > MEIO_DIA_M){
+      if ( led_Timer[row][col] > MEIO_DIA_M){
         tempo_acabou = true;
       }
     break;
 
     case DIA_1:
-      if ( led_Timer_milis[row][col] > UM_DIA_M){
+      if ( led_Timer[row][col] > UM_DIA_M){
         tempo_acabou = true;
       }
     break;
 
     case DIA_2:
-      if ( led_Timer_milis[row][col] > DOIS_DIAS_M){
+      if ( led_Timer[row][col] > DOIS_DIAS_M){
         tempo_acabou = true;
       }
     break;
 
     case DIA_3:
-      if ( led_Timer_milis[row][col] > TRES_DIAS_M){
+      if ( led_Timer[row][col] > TRES_DIAS_M){
         tempo_acabou = true;
       }
     break;
 
     case DIA_4:
-      if ( led_Timer_milis[row][col] > QUATRO_DIAS_M){
+      if ( led_Timer[row][col] > QUATRO_DIAS_M){
         tempo_acabou = true;
       }
     break;
 
     case DIA_5:
-      if ( led_Timer_milis[row][col] > CINCO_DIAS_M){
+      if ( led_Timer[row][col] > CINCO_DIAS_M){
         tempo_acabou = true;
       }
     break;
 
     case DIA_6:
-      if ( led_Timer_milis[row][col] > SEIS_DIAS_M){
+      if ( led_Timer[row][col] > SEIS_DIAS_M){
         tempo_acabou = true;
       }
     break;
 
 
     case SEMANA_1:
-      if ( led_Timer_milis[row][col] > UMA_SEMANA_M){
+      if ( led_Timer[row][col] > UMA_SEMANA_M){
         tempo_acabou = true;
       }
     break;
 
     case SEMANA_2:
-    if ( led_Timer_milis[row][col] > DUAS_SEMANAS_M){
+    if ( led_Timer[row][col] > DUAS_SEMANAS_M){
         tempo_acabou = true;
       }
     break;
 
     case MES_1:
-      if ( led_Timer_milis[row][col] > UM_MES_M){
+      if ( led_Timer[row][col] > UM_MES_M){
         tempo_acabou = true;
       }
     break;
@@ -234,3 +179,55 @@ void checa_tempo(short row, short col, bool solo_led){
     desliga_led(row,col,solo_led);
   }
 }
+
+
+void contador(){ // Adiciona milisegundos estimados para apagar.
+                //É mais preciso sem com !DEBUG, onde há menos delays
+  short row =0;
+  short col = 0;
+  for (row; row <= n_pca; row++){
+
+    for (col; col < n_led; col++){
+
+      if (led_ligado[row][col]){
+        led_Timer[row][col]++;
+
+        checa_tempo(row,col,is_solo(row,col)); // checa se já não é hora de desligar
+      }
+    }
+  }
+}
+
+void adiciona_tempo(){ //Descobre o led ligado a mais tempo e reseta ele
+
+  if (!TODOS_LIGADOS){
+     msg("Função adiciona_tempo não devia ter sido chamada");
+     return;
+  }
+  unsigned long int maior_tempo_ligado = 0;
+  short row = 0;
+  short col = 0;
+
+  bool achou_nenhum = true;
+  short biggest_row = 0;
+  short biggest_col = 0;
+
+  // Loop para achar o maior valor
+  for (row; row <= n_pca; row++){
+    for (col; col < n_led; col++){
+      if (!led_ligado[row][col]) continue; // ignore leds desligados para salvar tempo
+
+      if ( led_Timer[row][col] < maior_tempo_ligado){
+          maior_tempo_ligado = led_Timer[row][col];
+          biggest_row = row;
+          biggest_col = col;
+          achou_nenhum = false;
+      }
+    }
+  }
+
+  time_reset_all(row,col);
+
+}
+
+

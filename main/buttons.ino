@@ -14,3 +14,25 @@ bool debounce_check (int pino){ // pino: o index do botão no arduino
       return false;
     }
 }
+
+void btn_liga_led(){
+  if (debounce_check(porta_btn_liga)){
+    liga_aleatorio();
+  }
+}
+
+void btn_muda_modo(){
+  if (debounce_check(porta_btn_tempo)){
+    btn_count_time++;
+  }
+}
+
+void btn_modo_brilho(){
+  
+}
+ 
+
+void novo_modo(){ // adiciona novo modo
+
+  //Permitir detectar o modo de segundos e 30 minutos apenas em (TESTANDO);
+}

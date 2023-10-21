@@ -7,15 +7,19 @@ void loop(){
     msg(str(loop_test));
   }
 
-  debug_blink(50, 50);
-  debug_blink(200, 200);
-  //pwm[0].setPWM(0, 0, max_freq);
-  liga_led(0, 0, false);
-  delay(1000);
-  desliga_led(0, 0, false);
-  delay(1000);
+  //--- Funções de botões
+  if (TESTANDO) btn_liga_led();
+  btn_muda_modo();
+  btn_modo_brilho();
 
-  debug_solo(10); // teste do led solo
-  
-  tempo_ligado();
+
+  //
+  contador();
+
+  //debug_solo(10); // teste do led solo
+  dbug{ 
+    msg(" ");
+    msg(" ");
+    msg(" ");
+  }
 }
