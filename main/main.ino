@@ -4,7 +4,7 @@
 
 // ------------------------- PARÂMETROS DO PROJETO ------------------------- \\
 
-const bool TESTANDO = false; //Reduz globais de tempo para pequenos periodos.
+const bool TESTANDO = true; //Reduz globais de tempo para pequenos periodos.
 const bool DEBUG = true; // Faz testes usando o led local do arduino e retorna msgs de log
 const bool BEEP = true; // caso tenha um buzzer instalado.
 
@@ -17,7 +17,7 @@ const bool BEEP = true; // caso tenha um buzzer instalado.
 int loop_test = 0;
 
 #define num_placas  1 //Confirme o número de placas PCA
-#define leds_por_placas 1 //Confirme o número de leds no pca. Minimo 1 led.
+#define leds_por_placas 3 //Confirme o número de leds no pca. Minimo 1 led.
 bool solo_led = true; // Se houver um led conectado direto no arduino, marque true
 
 #define buzzer_pin 4 // porta do buzzer no arduino.
@@ -30,6 +30,9 @@ bool solo_led = true; // Se houver um led conectado direto no arduino, marque tr
 #define porta_led 3 // está assumindo que o led solitário tá na porta 3 do arduino
 #define porta_extensor_A 0x40 //Pino analogico do arduino p/ conexão IC2
 #define porta_extensor_B 0x41 // Pino analogico, eu acho que é o
+
+int btn_clique_led = 0;
+int btn_desclicado_led = 0;
 
 const int n_pca = num_placas;
 const int n_led = leds_por_placas - 1; //

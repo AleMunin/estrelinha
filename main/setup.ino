@@ -12,12 +12,16 @@ void setup(){
   }
   msg("Placa PCA inicializada");
 
-  if (BEEP){ //Se há um buzzer
+  bip { //Se há um buzzer
     pinMode(buzzer_pin, OUTPUT);
     dbug bip_me;
     if(!TESTANDO) twinkle();
   }
   else msg("Global Beeper offline");
+
+  pinMode(porta_btn_liga, INPUT);
+
+  pinMode(porta_btn_tempo, INPUT);
 
   time_setup(); //Inicializa as arrays timers propriamente
 

@@ -1,6 +1,6 @@
-void liga_led(short row, short col, bool solo){
+void liga_led(short row, short col, bool solo = false){
   if (solo){
-    //digitalWrite(ledPin[row][col],HIGH); // liga o led
+    digitalWrite(porta_led, HIGH);
     dbug msg("O led solo do arduino deve ter ligado");
   }
   else{
@@ -15,6 +15,7 @@ void liga_led(short row, short col, bool solo){
 void desliga_led(short row, short col, bool solo){
   if (solo){
     //digitalWrite(ledPin[row][col],LOW); // desliga o led
+    digitalWrite(porta_led, LOW);
     dbug msg("O led solo do arduino deve ter desligado");
   }
   else{
@@ -54,6 +55,23 @@ void liga_aleatorio(){
   }
 }
 
+
+void catalogo_de_ligados(){
+  bool tudo_ligado = true;
+  short row =0;
+  short col = 0;
+  for (row; row <= n_pca; row++){
+    for (col; col <= n_led; col++){
+      //precisa previnir de achar a ultima array de solo leds ou sempre vai marcar false
+      if ( (row == n_pca) && (col > 0) ) break;
+      dbug msg("Não estão ligados!");
+      if(!led_ligado[row][col]) tudo_ligado = false;
+    }
+  }
+
+  TODOS_LIGADOS = tudo_ligado;
+  dbug if (TODOS_LIGADOS) msg("TODOS OS LEDS FORAM LIGADOS");
+}
 void estrelinha () {
   
 }

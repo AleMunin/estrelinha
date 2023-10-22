@@ -36,3 +36,22 @@ void novo_modo(){ // adiciona novo modo
 
   //Permitir detectar o modo de segundos e 30 minutos apenas em (TESTANDO);
 }
+
+void btn_on_off_led () {
+  if (digitalRead(porta_led)==HIGH) {
+    digitalWrite(porta_led, LOW);
+  }else{
+    digitalWrite(porta_led, HIGH);
+  }
+}
+
+void keyup_btn_led (){
+  if ((btn_clique_led==1) and (btn_desclicado_led==1)) {
+    btn_clique_led = 0;
+    btn_desclicado_led = 0;
+    //btn_on_off_led (); //debug direto pra ligar leds
+    liga_aleatorio();
+  } 
+}
+
+
