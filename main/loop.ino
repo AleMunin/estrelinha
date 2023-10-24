@@ -1,12 +1,16 @@
 void loop(){
   dbug {
-    if (loop_test == 0) msg ("Initializing the first loop");
-    else msg("We're on loop now");
+    if (loop_test == 0){
+      msg ("Initializing the first loop");
+    }
+    else {
+      msg("We're on loop now");
+    }
     loop_test++;
     msg("This is the loop..:");
     msg(str(loop_test));
   }
-
+  msg ("Right after dbug");
   //--- Funções de botões
   //if (TESTANDO) btn_liga_led();
   //btn_muda_modo();
@@ -19,9 +23,16 @@ void loop(){
     btn_desclicado_led = 1;
   }
   keyup_btn_led ();
-  //
+
+  msg ("Right after key check");
+
   contador();
+
+  msg ("Right after contador");
+
   catalogo_de_ligados(); // checa se todos os leds tão ligados
+
+  msg ("Right after dbug");
 
   //delay(1000);
 

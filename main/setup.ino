@@ -17,15 +17,16 @@ void setup(){
     dbug bip_me;
     if(!TESTANDO) twinkle();
   }
-  else msg("Global Beeper offline");
-
+  else {
+    msg("Global Beeper offline");
+  }
   pinMode(porta_btn_liga, INPUT);
 
   pinMode(porta_btn_tempo, INPUT);
 
-  time_setup(); //Inicializa as arrays timers propriamente
+  //time_setup(); //Inicializa as arrays timers propriamente
 
-  boot();
+  //boot();
   
   msg("Exiting setup...");
 }

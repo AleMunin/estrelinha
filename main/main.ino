@@ -1,3 +1,10 @@
+/*  Horror code commit
+  Código continua resetando pro setup, multiplas vezes.
+  O beep e o led acendendo são APENAS chamados no setup.
+  A variavel loop continua rodando mas pode ou não incrementar, depende da onde o código resetou
+*/
+
+
 //Codigo para um Arduino Uno. Se for mudar para mega ou nanos, cheque a configuração de portas.
 #include <Wire.h> // Inclui a biblioteca para comunicação I2C
 #include <Adafruit_PWMServoDriver.h> // Inclui a biblioteca para lidar com o PCA9685
@@ -86,4 +93,5 @@ void time_reset_all(short row, short col){ // Reseta todos os timers
   //Costumava ter todos os leds
   led_Timer[row][col] = 0;      // reseta tempo total
 }
+
 
