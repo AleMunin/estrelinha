@@ -1,34 +1,64 @@
-void loop(){
-  dbug {
-    if (loop_test == 0) msg ("Initializing the first loop");
-    else msg("We're on loop now");
-    loop_test++;
-    msg("This is the loop..:");
-    msg(str(loop_test));
-  }
+void loop() {
 
-  //--- Funções de botões
-  //if (TESTANDO) btn_liga_led();
-  //btn_muda_modo();
-  //btn_modo_brilho();
+  config_request(); //Checa se quer o modo config
+  test_request(); // Checa se quer o modo teste
   
-  if ((digitalRead(porta_btn_liga) == HIGH) && (debounce_check (porta_btn_liga))){
-    btn_clique_led = 1;
-    btn_desclicado_led = 0;
-  }else{
-    btn_desclicado_led = 1;
-  }
-  keyup_btn_led ();
-  //
-  contador();
-  catalogo_de_ligados(); // checa se todos os leds tão ligados
 
-  //delay(1000);
+  if (MODO == CONFIG){
+    // Ordem dos botões
+    if (first_config){  //Garante que não vai haver problema com ascondicionais.
+      first_config = false;
+      TIME_TYPE = NENHUM_AINDA; // proibe o submenu de agir.
+      vezes_apertadas = 0;
+      dbug msg(F("O modo config foi rodado pela primeira vez"));
+    }
 
-  //debug_solo(10); // teste do led solo
-  dbug{ 
-    msg(" ");
-    msg(" ");
-    msg(" ");
+    push_count(); // Checa se precisa resetar o estado de contagem, ou adicionar nela
+    confirm_request(); // checa se deseja confirmar o input colocado
+    
   }
+  else if (MODO == TIME){
+
+    //Se botão de tempo e brilho são apertados ao mesmo tempo por 5 segundos
+    //entra em modo teste?
+
+
+  }
+  else if (MODO == TEST){
+
+    switch(modo_teste){
+
+      case CHECA_LED:
+        if (!ja_bootou){  //Previne de bootar todo ciclo
+          boot();
+          ja_bootou = true;
+        }
+
+      break;
+
+      case TESTE_ATUAL: // atualmente testando o que a rotina do modo tempo vai ser
+        fake_liga_chance();
+        checa_todos_ligados();
+        dbug {
+          if (TODOS_LIGADOS){
+            msg ("");
+            msg(F("TODOS OS LEDS FORAM LIGADOS"));
+            msg ("");
+          }
+        }
+        liga_aleatorio();
+        time_loop();
+
+        estrelinha();
+      break;
+
+      dbug {
+        loop_test++;
+        delay(1000);
+      }
+
+    } // switch modo teste
+
+  } // if modo teste
+  
 }

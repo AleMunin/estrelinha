@@ -1,31 +1,22 @@
-void setup(){
-
- 
-  Serial.begin(9600);
-  msg("Comunicação estabelecida");
-  Wire.begin(); // biblioteca do wire rodando para identificar os PCA
-  msg("Protocolo I2C Iniciado");
-
-  for (short i = 0; i < n_pca; i++){
-    pwm[i].begin();
-    pwm[i].setPWMFreq(max_freq); // n precisa da frequencia maxima, mas
-  }
-  msg("Placa PCA inicializada");
-
-  bip { //Se há um buzzer
-    pinMode(buzzer_pin, OUTPUT);
-    dbug bip_me;
-    if(!TESTANDO) twinkle();
-  }
-  else msg("Global Beeper offline");
-
-  pinMode(porta_btn_liga, INPUT);
-
-  pinMode(porta_btn_tempo, INPUT);
-
-  time_setup(); //Inicializa as arrays timers propriamente
-
-  boot();
+void setup() {
   
-  msg("Exiting setup...");
+  Serial.begin(9600);
+  dbug msg("");
+  bug();  //deixe sempre abaixo do serial pra testar coisas
+  Wire.begin();
+  pwm[0].begin();
+  pwm[0].setPWMFreq(1600);
+
+  short col = 0;
+  short row = 0;
+  
+  muda_tempo();
+  brilho_intensidade();
+
+  if (solo_led)n_pca++;
+  dbug msg("n_pca = " + str(n_pca));
+  //pinMode(porta_led, OUTPUT); //deixaisso aqui, não tira carol
+  delay(3000);
+  dbug msg (F("Saindo do setup"));
+  dbug msg("");
 }
