@@ -6,6 +6,8 @@ Adafruit_PWMServoDriver pwm[] = { Adafruit_PWMServoDriver(0x40) };
 
 short n_led = 3;
 short n_pca = 1;  //digite o numero de PCAs
+const short btn_num = 3;
+
 bool solo_led = true; //se true, setup dirá para emular ele como uma pca
 
 #define brilho_max 4095
@@ -18,7 +20,8 @@ bool DEBUG_LED = true; // debug para funções de led
 bool DEBUG_TIME = true;
 bool DEBUG_ROW = false;
 bool DEBUG_COL = false;
-bool DEBUG_EYEBLESS = true;
+bool DEBUG_EYEBLESS = false;
+bool BEEP = true;
 
 bool FAKE_BTN = true;
 
@@ -26,6 +29,7 @@ bool FAKE_BTN = true;
 
 short col=0; //C++ implicou com escopo por razão nenhuma nos defines.
 short row=0;
+short bti=0;
 
 int loop_test = 0;
 
@@ -43,6 +47,7 @@ bool btn_BRILHO = false;
 bool btn_TEMPO = false;
 
 bool first_config = true;
+bool first_time = true;
 
 short vezes_apertadas = 0; // 0 = nenhum apertado, valores importantes são sempre maior que 0
 
@@ -53,6 +58,7 @@ unsigned long millis_anterior = 0;  // registra o tempo que levou para ser apert
 
 
 #define dbug if(DEBUG)
+#define bip if (BEEP)
 #define ledbug if(DEBUG_LED)
 #define tbug if(DEBUG_TIME)
 #define rowbug if(DEBUG_ROW) // use em combinação com os outros, tbug rowbug para loops de tempo etc
@@ -62,16 +68,20 @@ unsigned long millis_anterior = 0;  // registra o tempo que levou para ser apert
 
 #define msg Serial.println
 #define str String
+#define bip_me basic_buzz(250)
 
 //loops
 
 #define for_row for(row=0;row<n_pca;row++)
 #define for_col for(col=0;col<n_led;col++)
+#define for_btn for(bti=0;bti<btn_num;bti++)
 
 #define printLed str(row)+"]["+str(col) 
 
 #define post_solo if(((row==(n_pca-1))&&(col>0))&&(solo_led))break //i tested, this seems to work
 #define solo_skip if(((row==(n_pca-1))&&(col>0))&&(solo_led))continue
+#define solo_skip_while if(((row_while==(n_pca-1))&&(col_while>0))&&(solo_led))continue
+
 #define solo_check if((row==(n_pca-1))&&(solo_led))
 
 
@@ -140,7 +150,7 @@ enum TEMPO_MAX { //Estado da máquina que define o tempo máximo de brilho.
   SEMANA_2,
   MES_1
 };
-TEMPO_MAX modo_tempo = SEGUNDOS_30;
+TEMPO_MAX modo_tempo = SEGUNDOS_10;
 
 unsigned long tempo_max = MEIO_MINUTO_M;
 
@@ -169,7 +179,7 @@ enum TESTS {
   TESTE_ATUAL // Modo onde você roda o teste que você quiser durante desenvolvimento
 };
 
-TESTS modo_teste = CHECA_LED;
+TESTS modo_teste = TESTE_ATUAL;
 
 bool ja_bootou = false; //lock que evita bootar de novo
 

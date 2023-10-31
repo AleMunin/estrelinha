@@ -80,30 +80,13 @@ void fake_liga_chance(){  //Aperta o botão falso aleatóriamente
 // Liga todos
 
 void boot(){ //Desliga e liga todos os leds, deixa todos ligados no final para testar.
-  msg("Boot, all leds");
-  for_row{
-    for_col{
-      post_solo;
-      liga_led(row,col);
-      time_start(row,col);
-      delay(300);
-    }
-  }
-  for_row{
-    for_col{
-      post_solo;
-      desliga_led(row,col);
-      time_start(row,col);
-      delay(300);
-    }
-  }
-  for_row{
-    for_col{
-      post_solo;
-      liga_led(row,col);
-      time_start(row,col);
-      delay(100);
-    }
-  }
+  msg(F("Boot, all leds"));
+  liga_todos();
+  delay(3000);
+  msg (F("Desligando os leds"));
+  desliga_todos();
+  delay(3000);
+  msg (F("Ligando os leds novamente"));
+  liga_todos();
 }
 // Liga todos...

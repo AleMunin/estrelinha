@@ -1,7 +1,10 @@
-bool wait_input(){  //conta quanto tempo está sem um input, antes de resetar o modo
+bool wait_input(){  //conta quanto tempo está sem QUALQUER input
   unsigned long millis_atual = millis();
   if ( millis_atual - millis_anterior > espera_para_apertar) return false;
-  else return true;
+  else{
+    millis_anterior = millis(); // registra nova contagem
+     return true;
+  }
 }
 
 
@@ -9,13 +12,16 @@ void push_count(){ //conta quantas vezes o botão foi pressionado.
 
   if (MODO != CONFIG) return;
   
-  if (!wait_input()){
+  if (!wait_input()){ //talvez isso n seja necessario
     vezes_apertadas = 0;  //reseta contagem.
+
+    msg(F("vezes apertadas resetado por inatividade"));
     //Faz um bip falando que resetou contagem
   }
   else if (btn_TEMPO) {
-    millis_anterior = millis(); // registra nova contagem
     vezes_apertadas++;
+    msg(F("Beep de vezes apertadas"));
+    bip bip_me;
   }
 }
 
@@ -122,6 +128,7 @@ void modos_config(){  //Altera modo_tempo baseado em vezes apertadas e em qual T
   if (vezes_apertadas != 0) muda_tempo(); //altera tempo max, reseta leds, etc
   vezes_apertadas = 0;
   MODO = TIME; //muda estado do switch de loop
+  first_time = true; //libera mensagem inicial
 }
 
 void pick_time_type(){  // seleciona TIME_TYPE (se quer escolher minutos, horas, dias, quinzenas)
@@ -132,22 +139,31 @@ void pick_time_type(){  // seleciona TIME_TYPE (se quer escolher minutos, horas,
 
       case 1:
         TIME_TYPE = SEGUNDOS;
+        dbug msg(F("Segundos escolhido"));
       break;
 
       case 2:
         TIME_TYPE = MINUTOS;
+        dbug msg(F("Minutos escolhido"));
       break;
 
       case 3:
         TIME_TYPE = HORAS;
+        dbug msg(F("Horas escolhido"));
       break;
 
       case 4:
         TIME_TYPE = DIAS;
+        dbug msg(F("Dias escolhido"));
       break;
 
       case 5:
         TIME_TYPE = QUINZENAS;
+        dbug msg(F("Quinzenas escolhido"));
+      break;
+
+      default:
+        dbug msg(F("Valor foi out of range"));
       break;
     }
 

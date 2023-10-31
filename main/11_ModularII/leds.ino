@@ -1,10 +1,10 @@
 void liga_led(short row, short col){
   solo_check{
     dbug ledbug msg(F("ligando solo led"));
-    analogWrite(porta_led, brilho_ino);
+    lighton analogWrite(porta_led, brilho_ino);
   }
   else{
-    pwm[row].setPWM(col, 0, brilho_pwm);
+    lighton pwm[row].setPWM(col, 0, brilho_pwm);
     dbug ledbug msg("ligando pwm led " + str(col));
   }
 }
@@ -30,31 +30,38 @@ void liga_aleatorio(){
   else{
 
     bool achou = false;
-    short row, col, while_count;
+    short row_while, col_while, while_count;
     while_count = 0; // existe só para debugs
     ledbug msg (F("Um led será selecionado aleatóriamente"));  
     do{
       ledbug  delay(2000);
       if (TODOS_LIGADOS) break; //improvavel mas por precaução
 
-      row = random((n_pca));
-      col = random(n_led);
+      row_while = random(n_pca);
+      col_while = random(n_led);
+      msg("");
+      msg ("STOP EVERYTHING");
+      delay (1000);
+      msg ("ROW ON WHILE LOOP IS..." + str(row_while));
+      msg ("COL ON WHILE LOOP IS..." + str(col_while));
+      delay (4000);
+      msg("");
       
       ledbug {
         msg("While loop = " + str(while_count + 0));
         while_count++;
       }
-      solo_skip; //previne os leds fantasmas se solo_led = true; N é logado em loops
+      solo_skip_while; //previne os leds fantasmas se solo_led = true; N é logado em loops
 
       ledbug msg("dbug de led passou solo skip, [" + printLed +"]");
       
-      if (!led_ligado[row][col]){ //se o led tá desligado
+      if (!led_ligado[row_while][col_while]){ //se o led tá desligado
         ledbug msg("O led [" + printLed +"] foi selecionado aleatoriamente");
-        time_start(row,col); //liga led e aciona timer
+        time_start(row_while,col_while); //liga led e aciona timer
         achou = true; //encerra o loop
       }
       else {
-        ledbug msg("O while rodará novamente pois o led já está selecionado, ["+str(row)+"]["+str(col)+"]");
+        ledbug msg("O while rodará novamente pois o led já está ligado, ["+str(row_while)+"]["+str(col_while)+"]");
         continue;
       }
     }
@@ -70,7 +77,7 @@ void checa_todos_ligados(){
       post_solo;
       if (!led_ligado[row][col]){
         tudo_ligado = false;
-        ledbug msg("led falso encontrado [" + printLed + "]");
+        ledbug msg("led desligado encontrado [" + printLed + "]");
       }
     }
     
@@ -148,5 +155,26 @@ void estrelinha(){ // Da um loop nos leds ligados. Faz o brilho deles alterar.
       ledbug msg("brilinho:" + str(brilhinho));
     }
 
+  }
+}
+
+void liga_todos(){
+  for_row{
+    for_col{
+      post_solo;
+      time_start(row,col);
+      delay(300);
+    }
+  }
+}
+
+void desliga_todos(){
+  for_row{
+    for_col{
+      post_solo;
+      desliga_led(row,col);
+      //time_start(row,col);
+      delay(300);
+    }
   }
 }
