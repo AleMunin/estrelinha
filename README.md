@@ -7,6 +7,48 @@ Main branch é apenas para coisas que foram testadas no hardware.
 - Loops sempre vão rodar o LED solitário do arduino por último.
 
 
+# Replica 3
+
+Se for conectar o LED solo, o código SEMPRE assume que está fazendo pela porta lógica 3 do UNo
+
+Arduino Porta A5 -> PCA Pino SCL
+
+Arduino Porta A4 -> PCA Pino SDA
+
+Arduino Porta 5V -> PCA Pino VCC
+
+Arduino Porta 5V -> Breadboard positivo
+
+Arduino Porta GND(1) -> PCA pino GND
+
+PCA Pino 0 -> LED 5mm 3.3V -> Pino 0 GND (já tem resistor 200~220 OHM)
+
+Arduino Porta 3 (pwm) -> LED 5mm -> Resistor 100ohms -> Arduino Porta GND(2)
+
+Arduino Porta 4 -> Chave táctil A -> Resistor 330ohms -> GND (Geral)
+
+Arduino Porta 7 -> Chave táctil A -> Resistor 330ohms -> GND (Geral)
+
+Arduino Porta 8 -> Chave táctil B -> Resistor 330ohms -> GND (Geral)
+
+Arduino Porta 12 -> resistor 100ohms -> Buzzer -> GND
+
+Arduino 5V -> Alimentação (geral)
+
+Alimentação (geral) -> Chave táctil A
+
+Alimentação (geral) -> Chave táctil B
+
+GND (geral) -> Arduino GND
+
+PCA[0] -> Porta 0 -> LED 5mm 3.3V -> Porta 0 GND (já tem resistor)
+
+PCA[0] -> Porta 1 -> LED 5mm 3.3V -> Porta 0 GND (já tem resistor)
+
+PCA[0] -> Porta 2 -> LED 5mm 3.3V -> Porta 0 GND (já tem resistor)
+
+
+
 # Replica 2
 
 Se for conectar o LED solo, o código SEMPRE assume que está fazendo pela porta lógica 3 do UNo
