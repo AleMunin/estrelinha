@@ -21,6 +21,7 @@ void desliga_led(short row, short col){
 }
 
 
+
 void liga_aleatorio(){
   if (!btn_liga) return; //Se o sinal do botão n foi apertado
   if (TODOS_LIGADOS){
@@ -39,14 +40,15 @@ void liga_aleatorio(){
 
       row_while = random(n_pca);
       col_while = random(n_led);
-      msg("");
-      msg ("STOP EVERYTHING");
-      delay (1000);
-      msg ("ROW ON WHILE LOOP IS..." + str(row_while));
-      msg ("COL ON WHILE LOOP IS..." + str(col_while));
-      delay (4000);
-      msg("");
-      
+      dbug{
+        msg("");
+        msg ("STOP EVERYTHING");
+        delay (1000);
+        msg ("ROW ON WHILE LOOP IS..." + str(row_while));
+        msg ("COL ON WHILE LOOP IS..." + str(col_while));
+        delay (4000);
+        msg("");
+      }
       ledbug {
         msg("While loop = " + str(while_count + 0));
         while_count++;

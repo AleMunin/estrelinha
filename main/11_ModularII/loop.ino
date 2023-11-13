@@ -47,7 +47,7 @@ void loop() {
     }
 
     //Codigo de cintilar aqui
-    
+    cintilar_loop();
     time_loop();
   }
   else if (MODO == TEST){
