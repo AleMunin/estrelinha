@@ -1,11 +1,13 @@
 void xelor(short row, short col, bool stat ){ // stat = true liga, false desliga
   if(stat){
     led_ligado[row][col] = true;
+    start_time[row][col] = millis();  //Previne problemas com comparação
   }
   else{
     led_ligado[row][col] = false;
+    start_time[row][col] = 0;
   }
-  led_timer[row][col] = 0;
+  led_timer[row][col] = 0;  //previne comparação no primeiro ciclo, de desligar o led, por usar millis();
 }
 
 void time_start(short row, short col){  //Liga e cataloga o led como ligado
@@ -15,8 +17,8 @@ void time_start(short row, short col){  //Liga e cataloga o led como ligado
 
 void tempo_acabou(short row, short col, bool new_mode = false){
   unsigned long int time_limit = tempo_max;
-
-  if ((led_timer[row][col] > time_limit) || (new_mode)){ // se o tempo passou do limite ou há um novo modo
+  //Isso era usando o contador geral
+  if ((led_timer[row][col] > time_limit) || (new_mode)){ // Esse é usando milisegundos
     tbug msg (F("O tempo do led acabou"));
     lighton desliga_led(row, col);
     xelor(row,col,false); //reseta contadores
@@ -53,10 +55,17 @@ void mantem_ligado(){
 
 
 void contagem(short row, short col){
+
+
+  // if (led_ligado[row][col]){
+  //   led_timer[row][col]++;
+  //   tbug msg ( "O led ["  + printLed +"] foi considerado ligado, time++ em " + str(led_timer[row][col]) );
+  // }
   if (led_ligado[row][col]){
-    led_timer[row][col]++;
-    tbug msg ( "O led ["  + printLed +"] foi considerado ligado, time++ em " + str(led_timer[row][col]) );
+    led_timer[row][col] = millis() - start_time[row][col];  //start_time foi iniciado em xelor
+    tbug msg ( "O led ["  + printLed +"] foi considerado ligado, millis: " + str(led_timer[row][col]) + " de " + str(tempo_max));
   }
+
 }
 
 void time_loop(){

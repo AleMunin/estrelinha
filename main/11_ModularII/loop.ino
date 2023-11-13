@@ -34,12 +34,21 @@ void loop() {
     if (first_time){  //seja gentil
       dbug msg (F("modo TIME"));
       first_time = false;
-    } 
+    }
+
+    //codigo da moedeira aqui
+
+    checa_todos_ligados(); 
+
+    if (MOEDEIRA){  //se foi recebido um sinal da moedeira.
+
+      MOEDEIRA = false; // reseta estado.
+      liga_aleatorio(); //Liga um ou reseta tempo do led mais antigo.
+    }
+
+    //Codigo de cintilar aqui
     
-    //Se botão de tempo e brilho são apertados ao mesmo tempo por 5 segundos
-    //entra em modo teste?
-
-
+    time_loop();
   }
   else if (MODO == TEST){
 

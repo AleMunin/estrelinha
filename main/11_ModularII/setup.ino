@@ -6,7 +6,7 @@ void setup() {
   bug();  //deixe sempre abaixo do serial pra testar coisas
   Wire.begin();
   pwm[0].begin();
-  pwm[0].setPWMFreq(1600);
+  pwm[0].setPWMFreq(1000);
 
   MODO=CONFIG;
 
