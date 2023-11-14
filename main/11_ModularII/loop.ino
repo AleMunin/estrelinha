@@ -44,6 +44,8 @@ void loop() {
     if ( (MOEDEIRA) || (btn_liga)){  //se foi recebido um sinal da moedeira ou botao de testes
 
       MOEDEIRA = false; // reseta estado.
+      //btn_liga = false;
+
       liga_aleatorio(); //Liga um ou reseta tempo do led mais antigo.
     }
 
@@ -88,6 +90,6 @@ void loop() {
 
   } // if modo teste
   
-
+  
   btn_reset(); // reseta estado dos botões
 }

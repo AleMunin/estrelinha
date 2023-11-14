@@ -94,11 +94,14 @@ void checa_todos_ligados(){
 
 void muda_modo_brilho(){
   msg(F("Muda brilho vai alterar o brilho"));
-
+  msg ("Brilho = " + str(modo_brilho));
+  msg ("switch_BRILHO = " + str(switch_BRILHO));
   switch_BRILHO++;
   
-  if (switch_BRILHO <= 4) switch_BRILHO = 1; // O ciclo nunca vai pra zero, mas coloquei no switch caso precise mudar no futuro
 
+  if (switch_BRILHO > 4){
+    switch_BRILHO = 1; // O ciclo nunca vai pra zero, mas coloquei no switch caso precise mudar no futuro
+  } 
   switch(switch_BRILHO){
   
     case 0:
@@ -107,20 +110,27 @@ void muda_modo_brilho(){
 
     case 1:
       modo_brilho = UM_QUARTO;
+      msg(F("Modo Brilho se tornou Um 1/4"));
     break;
 
     case 2:
       modo_brilho = DOIS_QUARTOS;
+      msg(F("Modo Brilho se tornou Um 2/4"));
     break;
     
     case 3:
       modo_brilho = TRES_QUARTOS;
+      msg(F("Modo Brilho se tornou Um 3/4"));
     break;
     
     case 4:
       modo_brilho = QUATRO_QUARTOS;
+      msg(F("Modo Brilho se tornou Um 4/4"));
     break;
     }
+
+  msg ("Brilho = " + str(modo_brilho));
+  msg ("switch_BRILHO = " + str(switch_BRILHO));
 }
 
 void religa_em_modo_brilho(){ 
@@ -133,6 +143,10 @@ void religa_em_modo_brilho(){
 }
 
 void brilho_intensidade(){
+
+  dbug msg("Brilho max era " + str(brilho_pwm) + " e " + str (brilho_ino));
+  msg ("Brilho = " + str(modo_brilho));
+
   switch(modo_brilho){
     case(UM_QUARTO):
       brilho_pwm = (brilho_max*0.25);
@@ -162,11 +176,17 @@ void brilho_intensidade(){
       brilho_pwm = brilho_max;
       brilho_ino = 255;
 
-      brilho_min_pwm = brilho_max*0.75;
+      brilho_min_pwm = brilho_max * 0.75;
       brilho_min_ino = 255*0.75;
     break;
 
   }
+
+  dbug msg("Brilho max agora é " + str(brilho_pwm) + " e " + str (brilho_ino));
+  msg ("Brilho = " + str(modo_brilho));
+
+  dbug delay(5000);
+
 }
 
 // n tá sendo mais usado

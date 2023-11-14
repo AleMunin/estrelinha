@@ -112,23 +112,23 @@ void muda_tempo(){
     break;
 
     case MINUTOS_15:
-      dbug tempo_max = 30000;
-      else tempo_max = QUINZE_MINUTOS;
+      //dbug tempo_max = 30000;
+      tempo_max = QUINZE_MINUTOS;
     break;
 
     case MINUTOS_30:
-      dbug tempo_max = 40000;
-      else tempo_max = MEIA_HORA_M;
+      //dbug tempo_max = 40000;
+      tempo_max = MEIA_HORA_M;
     break;
 
     case HORAS_1:
-      dbug tempo_max = 50000;
-      else tempo_max = UMA_HORA_M;
+      //dbug tempo_max = 50000;
+      tempo_max = UMA_HORA_M;
     break;
 
     case HORAS_3:
-      dbug tempo_max = 70000;
-      else tempo_max = TRES_HORAS_M;
+      //dbug tempo_max = 70000;
+      tempo_max = TRES_HORAS_M;
     break;
 
     case HORAS_6:
