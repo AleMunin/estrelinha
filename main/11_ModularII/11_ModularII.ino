@@ -100,8 +100,8 @@ unsigned long millis_anterior = 0;  // registra o tempo que levou para ser apert
 
 #define UM_SEGUNDO_M 1000 // 1 segundo em milisegundo
 #define DEZ_SEGUNDOS_M 10000 // 1 segundo em milisegundo
-#define MEIO_MINUTO_M 30000 // 30 segundos em mili
-#define DOIS_MINUTOS_M 120000 // 2 min em mili
+#define MEIO_MINUTO_M 30000 // 30 segundos em milisegundo
+#define DOIS_MINUTOS_M 120000 // 2 min em milisegundo
 #define QUINZE_MINUTOS 900000
 #define MEIA_HORA_M 1800000
 
@@ -119,7 +119,7 @@ unsigned long millis_anterior = 0;  // registra o tempo que levou para ser apert
 
 #define UMA_SEMANA_M 604800000
 #define DUAS_SEMANAS_M 1209600000
-#define UM_MES_M 2419200000 //dois meses passa da range de long int
+#define UM_MES_M 2419200000 // 28 dias em milisegundo
 
 // -------------- ENUMS
 
