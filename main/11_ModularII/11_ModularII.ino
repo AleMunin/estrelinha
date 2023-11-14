@@ -4,16 +4,22 @@
 
 Adafruit_PWMServoDriver pwm[] = { Adafruit_PWMServoDriver(0x40) };
 
-short n_led = 3;
+short n_led = 8;
 short n_pca = 1;  //digite o numero de PCAs
 const short btn_num = 3;
 
-bool solo_led = true; //se true, setup dirá para emular ele como uma pca
+bool solo_led = false; //se true, setup dirá para emular ele como uma pca
 
 #define brilho_max 4095
 #define sem_brilho 4096
 
 #define porta_led 3
+#define porta_tst 4 //btn de teste
+
+int btn_liga_luz = LOW;
+int btn_liga_last = LOW;
+int btn_liga_now;
+
 
 const bool DEBUG = true; // Se falso, todos os outros debugs são falsos
 bool DEBUG_LED = true; // debug para funções de led
@@ -124,6 +130,8 @@ enum BRILHO {
 };
 
 BRILHO modo_brilho = TRES_QUARTOS;
+
+short switch_BRILHO = 4;
 short brilho_pwm = brilho_max;
 short brilho_min_pwm = brilho_max*0.75; //o valor maximo que o brilho pode abaixar
 short brilho_ino = 255;

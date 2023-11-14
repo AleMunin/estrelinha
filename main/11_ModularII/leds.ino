@@ -60,6 +60,7 @@ void liga_aleatorio(){
       if (!led_ligado[row_while][col_while]){ //se o led tá desligado
         ledbug msg("O led [" + printLed +"] foi selecionado aleatoriamente");
         time_start(row_while,col_while); //liga led e aciona timer
+        xelor(row_while,col_while,true);
         achou = true; //encerra o loop
       }
       else {
@@ -91,7 +92,45 @@ void checa_todos_ligados(){
   TODOS_LIGADOS = tudo_ligado;
 }
 
+void muda_modo_brilho(){
+  msg(F("Muda brilho vai alterar o brilho"));
 
+  switch_BRILHO++;
+  
+  if (switch_BRILHO <= 4) switch_BRILHO = 1; // O ciclo nunca vai pra zero, mas coloquei no switch caso precise mudar no futuro
+
+  switch(switch_BRILHO){
+  
+    case 0:
+      modo_brilho = DESLIGADO;
+    break;
+
+    case 1:
+      modo_brilho = UM_QUARTO;
+    break;
+
+    case 2:
+      modo_brilho = DOIS_QUARTOS;
+    break;
+    
+    case 3:
+      modo_brilho = TRES_QUARTOS;
+    break;
+    
+    case 4:
+      modo_brilho = QUATRO_QUARTOS;
+    break;
+    }
+}
+
+void religa_em_modo_brilho(){ 
+  for_row{
+    for_col{
+      post_solo;
+      if(led_ligado[row][col])  liga_led(row,col);
+    }
+  }
+}
 
 void brilho_intensidade(){
   switch(modo_brilho){
@@ -130,7 +169,7 @@ void brilho_intensidade(){
   }
 }
 
-
+// n tá sendo mais usado
 void estrelinha(){ // Da um loop nos leds ligados. Faz o brilho deles alterar.
   for_row{
     for_col{

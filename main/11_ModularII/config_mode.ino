@@ -29,6 +29,8 @@ void push_count(){ //conta quantas vezes o botão foi pressionado.
 
 void modos_config(){  //Altera modo_tempo baseado em vezes apertadas e em qual TIME_TYPE está
 
+  bool out_of_range = false;
+
   switch(TIME_TYPE){
     case NENHUM_AINDA: //precaução
 
@@ -41,6 +43,7 @@ void modos_config(){  //Altera modo_tempo baseado em vezes apertadas e em qual T
       else if (vezes_apertadas = 2){
         modo_tempo = SEGUNDOS_30;
       }
+      else out_of_range = true;
 
     break;
 
@@ -54,6 +57,8 @@ void modos_config(){  //Altera modo_tempo baseado em vezes apertadas e em qual T
       else if (vezes_apertadas = 3){
         modo_tempo = MINUTOS_30;
       }
+      else out_of_range = true;
+
     break;
 
     case HORAS:
@@ -72,6 +77,7 @@ void modos_config(){  //Altera modo_tempo baseado em vezes apertadas e em qual T
       else if (vezes_apertadas = 5){
         modo_tempo = HORAS_12;
       }
+      else out_of_range = true;
     break;
 
     case DIAS:
@@ -109,6 +115,10 @@ void modos_config(){  //Altera modo_tempo baseado em vezes apertadas e em qual T
         case 7:
           modo_tempo = SEMANA_1;
         break;
+
+        default:
+          out_of_range = true;
+        break;
       }
     break;
 
@@ -120,15 +130,33 @@ void modos_config(){  //Altera modo_tempo baseado em vezes apertadas e em qual T
       else if (vezes_apertadas = 2){
         modo_tempo = MES_1;
       }
+      else out_of_range = true;
 
     break;
 
   }
 
-  if (vezes_apertadas != 0) muda_tempo(); //altera tempo max, reseta leds, etc
-  vezes_apertadas = 0;
-  MODO = TIME; //muda estado do switch de loop
-  first_time = true; //libera mensagem inicial
+
+
+  if ( (vezes_apertadas != 0) && (!out_of_range) ){
+    muda_tempo(); //altera tempo max, reseta leds, etc
+    vezes_apertadas = 0;
+    MODO = TIME; //muda estado do switch de loop
+    first_time = true; //libera mensagem inicial
+  }
+  else {
+    msg(F("Apertou vezes demais, out of range"));
+    bip {
+      basic_buzz(100);
+      basic_buzz(50);
+      basic_buzz(100);
+    }
+
+    vezes_apertadas = 0;
+    //reseta apenas as vezes apertadas
+  }
+
+  //reseta modo tempo
 }
 
 void pick_time_type(){  // seleciona TIME_TYPE (se quer escolher minutos, horas, dias, quinzenas)

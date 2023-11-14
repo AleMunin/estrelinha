@@ -62,8 +62,17 @@ void contagem(short row, short col){
   //   tbug msg ( "O led ["  + printLed +"] foi considerado ligado, time++ em " + str(led_timer[row][col]) );
   // }
   if (led_ligado[row][col]){
+
+    unsigned long tempo_atual = millis();    
     led_timer[row][col] = millis() - start_time[row][col];  //start_time foi iniciado em xelor
+    msg (tempo_atual);
+    msg("menos...");
+    msg (start_time[row][col]);
+    msg("da....");
+    msg (led_timer[row][col]);
     tbug msg ( "O led ["  + printLed +"] foi considerado ligado, millis: " + str(led_timer[row][col]) + " de " + str(tempo_max));
+  
+    delay(5000);
   }
 
 }

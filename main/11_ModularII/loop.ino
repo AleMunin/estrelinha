@@ -4,6 +4,7 @@ void loop() {
   
   config_request(); //Checa se quer o modo config
   test_request(); // Checa se quer o modo teste
+  brilho_request(); //checa se quer alterar o modo brilho e altera direto, em qualquer outro modo, incluindo teste 
 
   if (MODO == CONFIG){
     // Ordem dos botões
@@ -35,12 +36,12 @@ void loop() {
       dbug msg (F("modo TIME"));
       first_time = false;
     }
-
+    debug_request(); //em modo debug, emula o chamado da moedeira para código abaixo.
     //codigo da moedeira aqui
 
     checa_todos_ligados(); 
 
-    if (MOEDEIRA){  //se foi recebido um sinal da moedeira.
+    if ( (MOEDEIRA) || (btn_liga)){  //se foi recebido um sinal da moedeira ou botao de testes
 
       MOEDEIRA = false; // reseta estado.
       liga_aleatorio(); //Liga um ou reseta tempo do led mais antigo.
@@ -87,4 +88,6 @@ void loop() {
 
   } // if modo teste
   
+
+  btn_reset(); // reseta estado dos botões
 }

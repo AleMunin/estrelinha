@@ -29,6 +29,15 @@
 
 */
 
+void brilho_request(){
+  if ((btn_BRILHO) && (!btn_TEMPO) && (!btn_CONFIRMA)){
+    muda_modo_brilho();
+    brilho_intensidade(); //Altera globais de brilho maximo
+    religa_em_modo_brilho(); //reseta o brilho dos leds
+  }
+}
+
+
 void config_request(){ //Pode ser usado em qualquer modo
   if ( (btn_BRILHO && btn_TEMPO) && (!btn_CONFIRMA )){
     MODO = CONFIG;
@@ -44,6 +53,8 @@ void time_request(){ //Pode ser usado em qualquer modo
   if ( (!btn_BRILHO) && (!btn_CONFIRMA) && (btn_TEMPO )){
     vezes_apertadas = cont;  // emenda os dois códigos bem direitinho (eu acho)
     msg("vezes apertadas: " + str(vezes_apertadas));
+
+    btn_TEMPO = false; // previne bug de repetição inofensivo (eu acho)
   }
 }
 
@@ -77,5 +88,11 @@ void confirm_request(){
     vezes_apertadas = 0; //redundancia
     cont = 0;
   }
+}
+
+void btn_reset() {  //use apenas no fim do loop para resetar estados.
+  btn_CONFIRMA = false;
+  btn_BRILHO = false;
+  btn_TEMPO = false;
 }
 

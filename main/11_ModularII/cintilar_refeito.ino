@@ -45,17 +45,29 @@ void cintilar_loop() {
       //if ( (row == 2) && (col < 0)) col = 0;  //efeito colateral que faz o solo led ter 16x mais chance de piscar
       if(((row==(n_pca-1))&&(col_cintila>0))&&(solo_led))continue;
                         //Isso implica que há umachance dos 33 leds não rodarem essa função
-                       
+      
+      solo_check{
+        short brilho = brilho_ino; //brilho_max; // brilho máximo do pwm
+        short apagar = 0; // apaga o led
+        short reduzir = random((brilho / 3), apagar); // aleatoriza nunmeros de 1365 até 4096
+        short cintilar = random((brilho * 0.75), brilho);  // aleatoriza numeros de 3071.25 até 4095
 
-      short brilho = brilho_max; // brilho máximo do pwm
-      short apagar = sem_brilho; // apaga o led
-      short reduzir = random((brilho / 3), apagar); // aleatoriza nunmeros de 1365 até 4096
-      short cintilar = random((brilho * 0.75), brilho);  // aleatoriza numeros de 3071.25 até 4095
+        analogWrite(porta_led, cintilar);
 
-      pwm[row].setPWM(col_cintila, 0, cintilar);
-      delay(50);
+        delay(50);
 
-      pwm[row].setPWM(col_cintila, 0, reduzir);
+        analogWrite(porta_led, reduzir);
+      }
+      else{  
+        short brilho = brilho_pwm; //brilho_max; // brilho máximo do pwm
+        short apagar = sem_brilho; // apaga o led
+        short reduzir = random((brilho / 3), apagar); // aleatoriza nunmeros de 1365 até 4096
+        short cintilar = random((brilho * 0.75), brilho);  // aleatoriza numeros de 3071.25 até 4095
+
+        pwm[row].setPWM(col_cintila, 0, cintilar);
+        delay(50);
+
+        pwm[row].setPWM(col_cintila, 0, reduzir);}
   }
   //delay(500);
 }

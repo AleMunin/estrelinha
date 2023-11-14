@@ -53,25 +53,49 @@ void debug_count(){
 //Botoes Emulados
 
 void fake_button_turnon(){  //Finge apertar o botão de ligar, ou o sinal da moedeira
-  if (!FAKE_BTN){
-    msg(F("Botao falso foi chamado, mas o modo está desativado"));
+  dbug {  
+    if (!FAKE_BTN){
+      msg(F("Botao falso foi chamado, mas o modo está desativado"));
 
-    btn_liga = false;
+      btn_liga = false;
+    }
+    dbug (F("Botao falso para foi ativado"));
+    btn_liga = true;
   }
-  dbug (F("Botao falso para foi ativado"));
-  btn_liga = true;
+}
+
+bool debug_request(){ //basicamente um debouce igual ao loop_clique() exclusivo pro botão de debug
+  dbug{
+    int read = digitalRead(porta_tst);
+    if (read != btn_liga_last){
+      btn_liga_last = millis();
+    }
+    if ((millis () - btn_liga_last) > mscChoice){
+      btn_liga_now = read;
+        if (btn_liga_now == HIGH){
+          dbug (F("Btn de teste para foi ativado, simulando a moedeira"));
+          btn_liga = true;
+        }
+        else{
+          btn_liga = false;
+        }
+    }
+    btn_liga_last = read;
+  }
 }
 
 void fake_liga_chance(){  //Aperta o botão falso aleatóriamente
-  if ( ( (!TODOS_LIGADOS)&& (random(5) > 3)) || ((TODOS_LIGADOS)&& (random(10) > 1)) ) {
-    ledbug msg("");
-    ledbug msg(F("o botão vai ser apertado"));
-    ledbug msg("");
-    fake_button_turnon();
-  }
-  else{
-    ledbug msg(F("O botão não foi apertado dessa vez"));
-    btn_liga = false;
+  dbug {
+    if ( ( (!TODOS_LIGADOS)&& (random(5) > 3)) || ((TODOS_LIGADOS)&& (random(10) > 1)) ) {
+      ledbug msg("");
+      ledbug msg(F("o botão vai ser apertado"));
+      ledbug msg("");
+      fake_button_turnon();
+    }
+    else{
+      ledbug msg(F("O botão não foi apertado dessa vez"));
+      btn_liga = false;
+    }
   }
 }
 

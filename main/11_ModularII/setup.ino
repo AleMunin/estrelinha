@@ -1,7 +1,7 @@
 void setup() {
   
   Serial.begin(9600);
-  randomSeed(analogRead(A0)); //stupid thing for random to be anything close to random.
+  randomSeed(analogRead(0)); //stupid thing for random to be anything close to random.
   dbug msg("");
   bug();  //deixe sempre abaixo do serial pra testar coisas
   Wire.begin();

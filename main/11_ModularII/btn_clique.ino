@@ -1,6 +1,10 @@
-#define btn_tempo 4
-#define btn_brilho 7
-#define btn_confirma 8
+#define btn_tempo 5
+#define btn_brilho 6
+#define btn_confirma 7
+
+#define ledVermelho 9
+#define ledBranco 10
+#define ledVerde 11
 
 int btnNow[3]; // vai receber o status atualizado do btn
 int btnLast[3] = {LOW,LOW,LOW}; // recebe o status anterior (começamos com LOW)
@@ -14,13 +18,35 @@ int cont = 0; // contador de numero de cliques
   //Vezes apertadas já faz isso, mas vou deixar aqui caso precise para uma array
 
 unsigned long mscLast[3]; // armazena o tempo do ultimo debounce
-const unsigned long mscChoice = 50; //tempo escolhido para se ter certeza que o botao realmente foi pressionado
+const unsigned long mscChoice = 100; //tempo escolhido para se ter certeza que o botao realmente foi pressionado
 
 void setup_btn_clique () {
 
   for (n = 0; n < 3; n++) {
     pinMode(btns[n], INPUT);
   }
+
+  pinMode(ledVermelho, OUTPUT);
+  pinMode(ledBranco, OUTPUT);
+  pinMode(ledVerde, OUTPUT);
+}
+
+void vermelho () {
+  digitalWrite(ledVermelho, HIGH);
+  digitalWrite(ledBranco, LOW);
+  digitalWrite(ledVerde, LOW);
+}
+
+void branco () {
+  digitalWrite(ledVermelho, LOW);
+  digitalWrite(ledBranco, HIGH);
+  digitalWrite(ledVerde, LOW);
+}
+
+void verde () {
+  digitalWrite(ledVermelho, LOW);
+  digitalWrite(ledBranco, LOW);
+  digitalWrite(ledVerde, HIGH);
 }
 
 void loop_clique () {
@@ -44,12 +70,8 @@ void loop_clique () {
           //colocar a variável como verdadeiro aqui
           btn_para_global(n, true);
         }
-        else{
-          btn_para_global(n, false);
-        }
       }else{
-        //colocar a variável como falso aqui
-        
+        btn_para_global(n, false); //reseta botão para falso
       }
     }
     btnLast[n] = read;  
@@ -59,16 +81,19 @@ void loop_clique () {
 void btn_para_global(int n, bool stat){
   switch(n){
     case 0: //tempo
+      if (stat) vermelho();
       btn_TEMPO = stat;
       dbug if (stat) msg(F("Botão TEMPO apertado"));
     break;
 
     case 1: //brilho
+      if (stat) branco();
       btn_BRILHO = stat;
       dbug if (stat) msg(F("Botão BRILHO apertado"));
     break;
 
     case 2: //confirma
+      if (stat) verde();
       btn_CONFIRMA = stat;
       dbug if (stat) msg(F("Botão CONFIRMA apertado"));
     break;
