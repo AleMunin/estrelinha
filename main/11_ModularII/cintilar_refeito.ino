@@ -43,7 +43,7 @@ void cintilar_loop() {
       short row = random(n_pca);
       if (!led_ligado[row][col_cintila]) continue;  //se o led tá apagado
       //if ( (row == 2) && (col < 0)) col = 0;  //efeito colateral que faz o solo led ter 16x mais chance de piscar
-      if(((row==(n_pca-1))&&(col_cintila>0))&&(solo_led))continue
+      if(((row==(n_pca-1))&&(col_cintila>0))&&(solo_led))continue;
                         //Isso implica que há umachance dos 33 leds não rodarem essa função
                        
 

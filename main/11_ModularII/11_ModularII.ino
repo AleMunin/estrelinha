@@ -37,7 +37,7 @@ int loop_test = 0;
 bool TODOS_LIGADOS = false;
 bool led_ligado[2][15] = {{false}}; //a range da array nunca é alterada em nenhum teste
 unsigned long led_timer[2][15] = {{0}}; // elas são estáticas e os loops cortam antes de dar problema
-unsigned long start_time[2][15] = {{0}} // Evita um problema de comparação 
+unsigned long start_time[2][15] = {{0}}; // Evita um problema de comparação 
 
 // Estados
 
