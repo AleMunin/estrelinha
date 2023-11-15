@@ -15,13 +15,19 @@ void time_start(short row, short col){  //Liga e cataloga o led como ligado
   led_ligado[row][col] = true;
 }
 
+void time_end(short row, short col){
+  desliga_led(row,col);
+  led_ligado[row][col] = false;
+  xelor(row,col,false);
+}
+
+
 void tempo_acabou(short row, short col, bool new_mode = false){
   unsigned long int time_limit = tempo_max;
   //Isso era usando o contador geral
   if ((led_timer[row][col] > time_limit) || (new_mode)){ // Esse é usando milisegundos
     tbug msg (F("O tempo do led acabou"));
-    lighton desliga_led(row, col);
-    xelor(row,col,false); //reseta contadores
+    lighton time_end(row, col);
   }
 }
 

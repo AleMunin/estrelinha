@@ -137,7 +137,7 @@ void religa_em_modo_brilho(){
   for_row{
     for_col{
       post_solo;
-      if(led_ligado[row][col])  liga_led(row,col);
+      if(led_ligado[row][col]) liga_led(row,col);
     }
   }
 }
@@ -233,7 +233,7 @@ void desliga_todos(){
   for_row{
     for_col{
       post_solo;
-      desliga_led(row,col);
+      time_end(row,col);
       //time_start(row,col);
       delay(300);
     }
