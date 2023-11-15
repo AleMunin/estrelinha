@@ -4,13 +4,13 @@
 // um resistor pull-up é necessário ao conectar os pinos SDA/SCL - não precisa por causa do PCA que já vem embutido um resistor
 #include <Adafruit_PWMServoDriver.h> // Inclui a biblioteca para lidar com o PCA9685
 
-Adafruit_PWMServoDriver pwm[] = { Adafruit_PWMServoDriver(0x40) };
+Adafruit_PWMServoDriver pwm[] = { Adafruit_PWMServoDriver(0x40),  Adafruit_PWMServoDriver(0x41) };
 
-short n_led = 8;
-short n_pca = 1;  //digite o numero de PCAs
+short n_led = 11;
+short n_pca = 2;  //digite o numero de PCAs
 const short btn_num = 3;
 
-bool solo_led = false; //se true, setup dirá para emular ele como uma pca
+bool solo_led = true; //se true, setup dirá para emular ele como uma pca
 
 #define brilho_max 4095
 #define sem_brilho 4096

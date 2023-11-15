@@ -8,6 +8,10 @@ void setup() {
   pwm[0].begin();
   pwm[0].setPWMFreq(1000);
 
+
+  pwm[1].begin();
+  pwm[1].setPWMFreq(1000);
+
   MODO=CONFIG;
 
   pinMode(buzzer_pin, OUTPUT);
