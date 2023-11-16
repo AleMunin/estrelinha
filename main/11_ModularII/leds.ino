@@ -139,6 +139,11 @@ void muda_modo_brilho(){
 void religa_em_modo_brilho(){ 
   for_row{
     for_col{
+      if ((row == 2) && (col == 0)){
+        if(led_ligado[row][col]) msg(F("solo led está ligado em rebrilho"));
+        else msg(F("Solo led está desligado em rebrilho"));
+        delay(500);
+      }
       post_solo;
       if(led_ligado[row][col]) liga_led(row,col);
     }

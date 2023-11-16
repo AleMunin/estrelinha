@@ -50,6 +50,10 @@ void verde () {
 }
 
 void loop_clique () {
+
+  // msg("loop BTN CLIQUE");
+  // delay (5000);
+
   for (n = 0; n < 3; n++) {
     int read = digitalRead(btns[n]);
 
@@ -81,19 +85,19 @@ void loop_clique () {
 void btn_para_global(int n, bool stat){
   switch(n){
     case 0: //tempo
-      if (stat) vermelho();
+      //if (stat) vermelho();
       btn_TEMPO = stat;
       dbug if (stat) msg(F("Botão TEMPO apertado"));
     break;
 
     case 1: //brilho
-      if (stat) branco();
+      //if (stat) branco();
       btn_BRILHO = stat;
       dbug if (stat) msg(F("Botão BRILHO apertado"));
     break;
 
     case 2: //confirma
-      if (stat) verde();
+      //if (stat) verde();
       btn_CONFIRMA = stat;
       dbug if (stat) msg(F("Botão CONFIRMA apertado"));
     break;

@@ -1,5 +1,6 @@
 void setup() {
-  MODO = TIME;
+  MODO=CONFIG;
+
   Serial.begin(9600);
   randomSeed(analogRead(0)); //stupid thing for random to be anything close to random.
   dbug msg("");
@@ -12,6 +13,7 @@ void setup() {
   pwm[1].begin();
   pwm[1].setPWMFreq(1000);
 
+  
 
   pinMode(buzzer_pin, OUTPUT);
   bip bip_me;

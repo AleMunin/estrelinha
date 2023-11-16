@@ -33,7 +33,14 @@ void brilho_request(){
   if ((btn_BRILHO) && (!btn_TEMPO) && (!btn_CONFIRMA)){
     muda_modo_brilho();
     brilho_intensidade(); //Altera globais de brilho maximo
-    religa_em_modo_brilho(); //reseta o brilho dos leds
+
+    dbug ledbug{
+      if(led_ligado[row][col]) msg(F("solo led está ligado ANTES de rebrilho"));
+      else msg(F("Solo led está desligado ANTES de rebrilho"));
+      delay(500);
+    }
+
+    if (MODO != CONFIG) religa_em_modo_brilho(); //reseta o brilho dos leds
   }
 }
 
