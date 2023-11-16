@@ -1,5 +1,5 @@
 void setup() {
-  MODO = TEST;
+  MODO = TIME;
   Serial.begin(9600);
   randomSeed(analogRead(0)); //stupid thing for random to be anything close to random.
   dbug msg("");

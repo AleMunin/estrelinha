@@ -11,14 +11,21 @@ void xelor(short row, short col, bool stat ){ // stat = true liga, false desliga
 }
 
 void time_start(short row, short col){  //Liga e cataloga o led como ligado
-  lighton liga_led(row, col); //se os leds tão ativados, use isso
-  led_ligado[row][col] = true;
+  if (col < n_led) {
+    post_solo_return;
+    lighton liga_led(row, col); //se os leds tão ativados, use isso
+    led_ligado[row][col] = true;
+  }
 }
 
 void time_end(short row, short col){
-  desliga_led(row,col);
-  led_ligado[row][col] = false;
-  xelor(row,col,false);
+  if (col < n_led) {
+    post_solo_return;
+    desliga_led(row,col);
+    xelor(row,col,false);
+  }
+  //led_ligado[row][col] = false; //xelor does that
+  
 }
 
 
@@ -190,7 +197,7 @@ void muda_tempo(){
 
   for_row{
     for_col{
-      post_solo;
+      //post_solo;
 
       tempo_acabou(row,col,true); // will reset and turn off all the leds.
     }

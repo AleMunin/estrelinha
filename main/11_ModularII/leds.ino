@@ -1,5 +1,6 @@
 void liga_led(short row, short col){
   solo_check{
+    dbug (msg(F(" ")));
     dbug ledbug msg(F("ligando solo led"));
     lighton analogWrite(porta_led, brilho_ino);
   }
@@ -11,11 +12,13 @@ void liga_led(short row, short col){
 
 void desliga_led(short row, short col){
   solo_check{
+    dbug (msg(F(" ")));
     dbug ledbug msg(F("desligando solo led"));
+    dbug (msg(F(" ")));
     analogWrite(porta_led, 0);
   }
   else{
-    dbug ledbug msg("desligando pwm led " + str(col));
+    dbug ledbug msg("desligando pwm led [" + str(row) + "][" + str(col) + "]");
     pwm[row].setPWM(col, 0, sem_brilho);
   }
 }

@@ -88,10 +88,12 @@ unsigned long millis_anterior = 0;  // registra o tempo que levou para ser apert
 #define printLed str(row)+"]["+str(col) 
 
 #define post_solo if(((row==(n_pca-1))&&(col>0))&&(solo_led))break //i tested, this seems to work
+#define post_solo_return if(((row==(n_pca-1))&&(col>0))&&(solo_led))return
 #define solo_skip if(((row==(n_pca-1))&&(col>0))&&(solo_led))continue
 #define solo_skip_while if(((row_while==(n_pca-1))&&(col_while>0))&&(solo_led))continue
 
-#define solo_check if((row==(n_pca-1))&&(solo_led))
+//#define solo_check if((row==(n_pca-1))&&(solo_led)) //og solo check
+#define solo_check if((row==(n_pca-1))&&(solo_led)&&(col==0))
 
 
 //--------------------- DEFINES DE TEMPO

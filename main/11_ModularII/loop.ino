@@ -1,6 +1,16 @@
 
 void loop() {
 
+  msg(F(" "));
+  msg(F("------------------ "));
+  msg(F(" "));
+  // if (led_ligado[2][0]){
+  //   msg ("Inicio de loop, led 2 0 ligado");
+  //   delay(500);
+  // }
+  // else {
+  //   msg("Led 2 desligado no inicio");
+  // }
   loop_clique(); // talvez precise de uma array de delay
   
   config_request(); //Checa se quer o modo config
@@ -33,27 +43,31 @@ void loop() {
     }
   }
   else if (MODO == TIME){
+    //led_ligado[0][2] = true;
 
-    if (first_time){  //seja gentil
-      dbug msg (F("modo TIME"));
-      first_time = false;
-    }
-    debug_request(); //em modo debug, emula o chamado da moedeira para código abaixo.
-    //codigo da moedeira aqui
+    // if (first_time){  //seja gentil
+    //   dbug msg (F("modo TIME"));
+    //   first_time = false;
+    // }
+    // debug_request(); //em modo debug, emula o chamado da moedeira para código abaixo.
+    // //codigo da moedeira aqui
 
-    checa_todos_ligados(); 
+    // checa_todos_ligados(); 
 
-    if ( (MOEDEIRA) || (btn_liga)){  //se foi recebido um sinal da moedeira ou botao de testes
+    // if ( (MOEDEIRA) || (btn_liga)){  //se foi recebido um sinal da moedeira ou botao de testes
 
-      MOEDEIRA = false; // reseta estado.
-      //btn_liga = false;
+    //   MOEDEIRA = false; // reseta estado.
+    //   //btn_liga = false;
 
-      liga_aleatorio(); //Liga um ou reseta tempo do led mais antigo.
-    }
-
-    //Codigo de cintilar aqui
+    //   liga_aleatorio(); //Liga um ou reseta tempo do led mais antigo.
+    // }
+    // //Codigo de cintilar aqui
+    if (!led_ligado[2][0]) msg("solo desligado");
     cintilar_loop();
-    time_loop();
+    if (!led_ligado[0][0]) msg("solo desligado");
+  
+    //time_loop();
+  
   }
   else if (MODO == TEST){
 
