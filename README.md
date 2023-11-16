@@ -45,6 +45,15 @@ Arduino Porta 7 -> Chave táctil B -> Resistor 330ohms -> GND (Geral)
 
 Opcional: Leds conectados com o arduino, que se mantem ligados pro último botão apertado
 
+Para funcionar, apenas vá em btn_clique.ino e descomente 
+
+```
+//if (stat) verde();
+//if (stat) branco();
+//if (stat) vermelho();
+
+```
+
 Led Vermelho (tempo) -> porta 9
 
 Led Branco ou amarelo ( Brilho) -> Porta 10
