@@ -6,7 +6,7 @@
 
 Adafruit_PWMServoDriver pwm[] = { Adafruit_PWMServoDriver(0x40),  Adafruit_PWMServoDriver(0x41) };
 
-short n_led = 11;
+short n_led = 4;
 short n_pca = 2;  //digite o numero de PCAs
 const short btn_num = 3;
 

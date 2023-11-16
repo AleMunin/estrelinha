@@ -1,11 +1,13 @@
+
 void loop() {
 
   loop_clique(); // talvez precise de uma array de delay
   
   config_request(); //Checa se quer o modo config
-  test_request(); // Checa se quer o modo teste
+  test_request(TESTE_ATUAL); // Checa se quer o modo teste
   brilho_request(); //checa se quer alterar o modo brilho e altera direto, em qualquer outro modo, incluindo teste 
 
+  
   if (MODO == CONFIG){
     // Ordem dos botões
     if (first_config){  //Garante que não vai haver problema com as condicionais.
@@ -66,19 +68,12 @@ void loop() {
       break;  //------------------------------------------------
 
       case TESTE_ATUAL: // atualmente testando o que a rotina do modo tempo vai ser
-        if (!TODOS_LIGADOS) fake_liga_chance(); //por enquanto não vamos adicionar mais tempo 
-        checa_todos_ligados(); 
-        dbug {
-          if (TODOS_LIGADOS){
-            msg ("");
-            msg(F("TODOS OS LEDS FORAM LIGADOS"));
-            msg ("");
-          }
+        if (!ja_bootou){  //Previne de bootar todo ciclo
+          boot();
+          ja_bootou = true;
         }
-        if (!TODOS_LIGADOS) liga_aleatorio();
-        time_loop();
-
-        //estrelinha();
+        cintilar_loop();  
+        
       break; //------------------------------------------------
 
       dbug {

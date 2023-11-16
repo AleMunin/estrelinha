@@ -87,6 +87,7 @@ void time_loop(){
   tbug msg (F("Time loop começou"));
   for_row{
       for_col{
+      post_solo;
       contagem(row,col);  //por enquanto row n é adicionado
       tempo_acabou(row,col);
     }

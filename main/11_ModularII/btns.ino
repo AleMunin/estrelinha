@@ -58,10 +58,10 @@ void time_request(){ //Pode ser usado em qualquer modo
   }
 }
 
-void test_request(){
+void test_request(TESTS tst_mode = CHECA_LED){
   if ( (btn_BRILHO) && (btn_TEMPO) && (btn_CONFIRMA )){
     MODO = TEST;
-    modo_teste = CHECA_LED;
+    modo_teste = tst_mode;
     ja_bootou = false;
     msg(F(""));
     msg(F("Modo teste pedido por botao"));
