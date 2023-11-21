@@ -11,6 +11,7 @@ void loop() {
   test_request(TESTE_ATUAL); // Checa se quer o modo teste
   brilho_request(); //checa se quer alterar o modo brilho e altera direto, em qualquer outro modo, incluindo teste 
 
+  moedeira_loop();
   
   if (MODO == CONFIG){
     // Ordem dos botões

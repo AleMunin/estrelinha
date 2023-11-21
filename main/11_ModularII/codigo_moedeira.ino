@@ -4,7 +4,7 @@
 #define ledAcionar 6 // led apenas para demostrar o evento que vai ser acionado ao atingir o valorAlmejado
 
 const bool moedeira_individual = false; //teste antigo da moedeira com os leds
-#define moed_solo if(moedeira_moedeira_individual)
+#define moed_solo if(moedeira_individual)
 
 volatile bool novaMoeda = false;                  
 volatile int pulso;     //contagem de pulso
@@ -18,21 +18,56 @@ int creditos = 0;
 
 
 void moedeira_setup() {
-  Serial.begin(9600);                 
+  //Serial.begin(9600);                 
   attachInterrupt(digitalPinToInterrupt(moedeira), moedaInserida, RISING);
+
   moed_solo{
     pinMode(ledConfirmar, OUTPUT);
     pinMode(ledAcionar, OUTPUT);
   }
+
 }
 
 // evento acionado automaticamente antes do loop
 void moedaInserida(){
   novaMoeda = true; 
   pulso++;
+
   moed_solo digitalWrite(ledConfirmar, HIGH);
+
   timeOut = 0;
 }
+
+void identificaMoeda(){
+  switch (pulso) { 
+    case 1:
+      tipoMoeda = "Moeda de 1 real ";
+      Serial.println("Tipo: " + tipoMoeda);
+      qualTipoMoeda = 1;
+      moeda = 100;
+      Serial.println(qualTipoMoeda,DEC);  
+      Serial.println(" ------- ") ;         
+      pulso = 0;
+      novaMoeda = false;
+      break;
+    case 2:
+      tipoMoeda = "Moeda de 50 centavos";
+      Serial.println("Tipo: " + tipoMoeda);
+      qualTipoMoeda = 2;
+      moeda = 50;
+      Serial.println(qualTipoMoeda,DEC);   
+      Serial.println(F(" ------- ")) ;    
+
+      if (totalMoeda == moeda) {
+        novaMoeda = true;
+      }else {
+        pulso = 0;
+        novaMoeda = false;
+      }
+      break;
+  }
+}
+
 
 void moedeira_loop() { 
   if (novaMoeda == true){
@@ -46,17 +81,20 @@ void moedeira_loop() {
       if (moeda >= valorAlmejado || totalMoeda >= valorAlmejado) {
         creditos = creditos + 1;
         moeda = moeda - valorAlmejado;  
-      }else if (moeda < valorAlmejado) { 
+      }
+      else if (moeda < valorAlmejado) { 
         totalMoeda = totalMoeda + moeda; // salva o valor na memória
         creditos = 0;
-      } else { // caso nenhuma das alternativas, não faça nada! }
+      }
+      else { // caso nenhuma das alternativas, não faça nada!
+      }
     
       // Serial.println(totalMoeda);
       // Serial.println(" ~~~~~~~~~~~~~~ ");
       // as vezes o valor fica negativo, mas não tem problema!!
 
       Serial.println(moeda);
-      Serial.println(F(" centavos restantes para acender os leds, e "));
+      Serial.println(F(" centavos restantes para acender os leds, é "));
       Serial.println(creditos);  
       Serial.println(F(" créditos atuais."));
 
@@ -79,32 +117,3 @@ void moedeira_loop() {
   }  
 }
 
-void identificaMoeda(){
-  switch (pulso) { 
-    case 1:
-      tipoMoeda = "Moeda de 1 real ";
-      Serial.println("Tipo: " + tipoMoeda);
-      qualTipoMoeda = 1;
-      moeda = 100;
-      Serial.println(qualTipoMoeda,DEC);  
-      Serial.println(" ------- ") ;         
-      pulso = 0;
-      novaMoeda = false;
-      break;
-    case 2:
-      tipoMoeda = "Moeda de 50 centavos";
-      Serial.println("Tipo: " + tipoMoeda);
-      qualTipoMoeda = 2;
-      moeda = 50;
-      Serial.println(qualTipoMoeda,DEC);   
-      Serial.println(" ------- ") ;    
-
-      if (totalMoeda == moeda) {
-        novaMoeda = true;
-      }else {
-        pulso = 0;
-        novaMoeda = false;
-      }
-      break;
-  }
-}

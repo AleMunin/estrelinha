@@ -14,6 +14,7 @@ void setup() {
   pwm[1].setPWMFreq(1000);
 
   
+  moedeira_setup();
 
   pinMode(buzzer_pin, OUTPUT);
   bip bip_me;

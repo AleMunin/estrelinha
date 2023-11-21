@@ -1,3 +1,6 @@
+//Original bullshit
+
+
 #include <Wire.h> // biblioteca para comunicação I2C - A4 (SDA) e A5 (SCL)
 // um resistor pull-up é necessário ao conectar os pinos SDA/SCL - não precisa por causa do PCA que já vem embutido um resistor
 #include <Adafruit_PWMServoDriver.h> // Inclui a biblioteca para lidar com o PCA9685
