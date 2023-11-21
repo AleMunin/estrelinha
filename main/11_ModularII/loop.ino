@@ -11,7 +11,7 @@ void loop() {
   test_request(TESTE_ATUAL); // Checa se quer o modo teste
   brilho_request(); //checa se quer alterar o modo brilho e altera direto, em qualquer outro modo, incluindo teste 
 
-  moedeira_loop();
+  moedeira_loop(); //Funciona uma vez, em qualquer modo.
   
   if (MODO == CONFIG){
     // Ordem dos botões
@@ -38,30 +38,23 @@ void loop() {
     }
   }
   else if (MODO == TIME){
-    //led_ligado[0][2] = true;
 
-  // if (first_time){  //seja gentil
-  //   dbug msg (F("modo TIME"));
-  //   first_time = false;
-  // }
+    if (first_time){  //seja gentil
+      dbug msg (F("modo TIME"));
+      first_time = false;
+    }
     // debug_request(); //em modo debug, emula o chamado da moedeira para código abaixo.
-    // //codigo da moedeira aqui
 
     checa_todos_ligados(); 
 
-    // if ( (MOEDEIRA) || (btn_liga)){  //se foi recebido um sinal da moedeira ou botao de testes
+    if ( (MOEDEIRA_OK) || (btn_liga)){  //se foi recebido um sinal da moedeira ou botao de testes
 
-    //   MOEDEIRA = false; // reseta estado.
-    //   //btn_liga = false;
+      MOEDEIRA_OK = false; // reseta estado.
+      btn_liga = false;
 
-    //   liga_aleatorio(); //Liga um ou reseta tempo do led mais antigo.
-    // }
-    // //Codigo de cintilar aqui
-    if (!led_ligado[2][0]) msg("solo desligado");
-    cintilar_loop();
-    if (!led_ligado[0][0]) msg("solo desligado");
-  
-    //time_loop();
+      liga_aleatorio(); //Liga um ou reseta tempo do led mais antigo.
+    }
+    time_loop();
   
   }
   else if (MODO == TEST){

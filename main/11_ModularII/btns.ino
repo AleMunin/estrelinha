@@ -83,6 +83,8 @@ void confirm_request(){
   if ( (btn_CONFIRMA) && ((!btn_BRILHO) && (!btn_TEMPO))){ //Apenas rode se o input confirma foi tocado
     //confirma o input de contagem atual, chamandoas variaveis la
 
+    tempo_bip();  //da sinal em bips de quantas vezes foram apertadas
+    
     if (TIME_TYPE == NENHUM_AINDA){
       dbug msg(F("Não existe TIME_TYPE ainda, será selecionado agora"));
       pick_time_type(); //Seleciona se quer o modo escolher minutos, horas, dias, quinzenas
@@ -92,6 +94,7 @@ void confirm_request(){
       modos_config(); //Seleciona o número de minutos, horas, dias, quinzenas.
       msg(F("Após a função confirm_request concluir, sairá do modo CONFIG"));
     }
+    
     vezes_apertadas = 0; //redundancia
     cont = 0;
   }

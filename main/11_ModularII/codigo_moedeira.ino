@@ -1,4 +1,4 @@
-#define moedeira 2 // para interrupção no arduino uno
+//#define moedeira 2 // para interrupção no arduino uno (copiado para o inicio do arquivo)
 #define ledConfirmar 4 // para confirmar o recebimento do sinal da moedeira para o arduíno
 #define valorAlmejado 100 // qual valor deseja cobrar?
 #define ledAcionar 6 // led apenas para demostrar o evento que vai ser acionado ao atingir o valorAlmejado
@@ -80,7 +80,11 @@ void moedeira_loop() {
 
       if (moeda >= valorAlmejado || totalMoeda >= valorAlmejado) {
         creditos = creditos + 1;
-        moeda = moeda - valorAlmejado;  
+        moeda = moeda - valorAlmejado;
+
+        //Essa é a única parte que interage com o resto do código
+
+        MOEDEIRA_OK = true;
       }
       else if (moeda < valorAlmejado) { 
         totalMoeda = totalMoeda + moeda; // salva o valor na memória

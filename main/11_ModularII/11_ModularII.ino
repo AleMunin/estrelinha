@@ -16,6 +16,7 @@ bool solo_led = true; //se true, setup dirá para emular ele como uma pca
 #define brilho_max 4095
 #define sem_brilho 4096
 
+#define moedeira 2 // para interrupção no arduino uno
 #define porta_led 3
 #define porta_tst 4 //btn de teste
 
@@ -193,10 +194,10 @@ enum TESTS {
   TESTE_ATUAL // Modo onde você roda o teste que você quiser durante desenvolvimento
 };
 
-TESTS modo_teste = TESTE_ATUAL;
+TESTS modo_teste = CHECA_LED;
 
 bool ja_bootou = false; //lock que evita bootar de novo
 
-bool MOEDEIRA = false; 
+bool MOEDEIRA_OK = false; 
 
 
