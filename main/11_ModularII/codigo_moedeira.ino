@@ -3,6 +3,9 @@
 #define valorAlmejado 100 // qual valor deseja cobrar?
 #define ledAcionar 6 // led apenas para demostrar o evento que vai ser acionado ao atingir o valorAlmejado
 
+const bool moedeira_individual = false; //teste antigo da moedeira com os leds
+#define moed_solo if(moedeira_moedeira_individual)
+
 volatile bool novaMoeda = false;                  
 volatile int pulso;     //contagem de pulso
 volatile int timeOut = 0;   //tempo limite após a última moeda inserida
@@ -14,23 +17,24 @@ int totalMoeda; // para calcular o que falta de valor para atingir o valorAlmeja
 int creditos = 0; 
 
 
-void setup() {
+void moedeira_setup() {
   Serial.begin(9600);                 
   attachInterrupt(digitalPinToInterrupt(moedeira), moedaInserida, RISING);
-
-  pinMode(ledConfirmar, OUTPUT);
-  pinMode(ledAcionar, OUTPUT);
+  moed_solo{
+    pinMode(ledConfirmar, OUTPUT);
+    pinMode(ledAcionar, OUTPUT);
+  }
 }
 
 // evento acionado automaticamente antes do loop
 void moedaInserida(){
   novaMoeda = true; 
   pulso++;
-  digitalWrite(ledConfirmar, HIGH);
+  moed_solo digitalWrite(ledConfirmar, HIGH);
   timeOut = 0;
 }
 
-void loop() { 
+void moedeira_loop() { 
   if (novaMoeda == true){
     // Serial.println(timeOut);
     // Serial.println(" --------- x ---------");
@@ -52,18 +56,18 @@ void loop() {
       // as vezes o valor fica negativo, mas não tem problema!!
 
       Serial.println(moeda);
-      Serial.println(" centavos restantes para acender os leds, e ");
+      Serial.println(F(" centavos restantes para acender os leds, e "));
       Serial.println(creditos);  
-      Serial.println(" créditos atuais.");
+      Serial.println(F(" créditos atuais."));
 
       // led indicando recebimento do pulso
-      digitalWrite(ledConfirmar, LOW);
+      moed_solo digitalWrite(ledConfirmar, LOW);
 
       // evento a ser acionado se existir créditos
       if (creditos > 0) { 
-        digitalWrite(ledAcionar, HIGH);
+        moed_solo digitalWrite(ledAcionar, HIGH);
         delay(1000);
-        digitalWrite(ledAcionar, LOW);
+        moed_solo digitalWrite(ledAcionar, LOW);
 
         totalMoeda = 0;
         creditos = 0;
