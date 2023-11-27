@@ -13,7 +13,6 @@ String tipoMoeda; // identificar qual é o valor da moeda que está utilizando (
 int qualTipoMoeda; // pulso que foi cadastrado na moedeira
 
 int moeda; // valor que irá receber para atingir o valorAlmejado
-int totalMoeda; // para calcular o que falta de valor para atingir o valorAlmejado
 int creditos = 0; 
 
 
@@ -41,7 +40,7 @@ void moedaInserida(){
 void identificaMoeda(){
   switch (pulso) { 
     case 1:
-      tipoMoeda = "Moeda de 1 real ";
+      tipoMoeda = "Moeda valor único ";
       Serial.println("Tipo: " + tipoMoeda);
       qualTipoMoeda = 1;
       moeda = 100;
@@ -50,30 +49,14 @@ void identificaMoeda(){
       pulso = 0;
       novaMoeda = false;
       break;
-    case 2:
-      tipoMoeda = "Moeda de 50 centavos";
-      Serial.println("Tipo: " + tipoMoeda);
-      qualTipoMoeda = 2;
-      moeda = 50;
-      Serial.println(qualTipoMoeda,DEC);   
-      Serial.println(F(" ------- ")) ;    
-
-      if (totalMoeda == moeda) {
-        novaMoeda = true;
-      }else {
-        pulso = 0;
-        novaMoeda = false;
-      }
-      break;
   }
 }
 
 
 void moedeira_loop() { 
   if (novaMoeda == true){
-    // Serial.println(timeOut);
-    // Serial.println(" --------- x ---------");
-    if(pulso == 2 || timeOut>25){          
+
+    if(pulso == 1 || timeOut>25){          
       identificaMoeda();
 
       // Serial.println(moeda);
@@ -86,16 +69,9 @@ void moedeira_loop() {
 
         MOEDEIRA_OK = true;
       }
-      else if (moeda < valorAlmejado) { 
-        totalMoeda = totalMoeda + moeda; // salva o valor na memória
-        creditos = 0;
-      }
+      
       else { // caso nenhuma das alternativas, não faça nada!
       }
-    
-      // Serial.println(totalMoeda);
-      // Serial.println(" ~~~~~~~~~~~~~~ ");
-      // as vezes o valor fica negativo, mas não tem problema!!
 
       Serial.println(moeda);
       Serial.println(F(" centavos restantes para acender os leds, é "));
@@ -111,7 +87,6 @@ void moedeira_loop() {
         delay(1000);
         moed_solo digitalWrite(ledAcionar, LOW);
 
-        totalMoeda = 0;
         creditos = 0;
       }		
       delay(100);
@@ -120,4 +95,3 @@ void moedeira_loop() {
     delay(5);
   }  
 }
-
