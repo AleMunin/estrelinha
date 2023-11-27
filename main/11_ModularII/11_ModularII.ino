@@ -1,5 +1,4 @@
-//Original bullshit
-
+//Moedeira Update
 
 #include <Wire.h> // biblioteca para comunicação I2C - A4 (SDA) e A5 (SCL)
 // um resistor pull-up é necessário ao conectar os pinos SDA/SCL - não precisa por causa do PCA que já vem embutido um resistor
