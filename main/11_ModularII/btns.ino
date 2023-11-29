@@ -49,9 +49,13 @@ void config_request(){ //Pode ser usado em qualquer modo
   if ( (btn_BRILHO && btn_TEMPO) && (!btn_CONFIRMA )){
     MODO = CONFIG;
     first_config = true; // reseta rotina de setup do config, toda vez
-    msg(F(""));
-    msg(F("Modo Config pedido por botao"));
-    msg(F(""));
+
+    dbug{
+      delay(300);
+      msg(F(""));
+      msg(F("Modo Config pedido por botao"));
+      msg(F(""));
+    }
   }
 }
 
@@ -59,6 +63,8 @@ void time_request(){ //Pode ser usado em qualquer modo
   if (MODO != CONFIG) return;
   if ( (!btn_BRILHO) && (!btn_CONFIRMA) && (btn_TEMPO )){
     vezes_apertadas = cont;  // emenda os dois códigos bem direitinho (eu acho)
+
+    dbug delay(300);
     msg("vezes apertadas: " + str(vezes_apertadas));
 
     btn_TEMPO = false; // previne bug de repetição inofensivo (eu acho)
@@ -70,9 +76,12 @@ void test_request(TESTS tst_mode = CHECA_LED){
     MODO = TEST;
     modo_teste = tst_mode;
     ja_bootou = false;
-    msg(F(""));
-    msg(F("Modo teste pedido por botao"));
-    msg(F(""));
+    dbug{
+      delay(500);
+      msg(F(""));
+      msg(F("Modo teste pedido por botao"));
+      msg(F(""));
+    }
   }
 }
 
@@ -87,12 +96,16 @@ void confirm_request(){
     
     if (TIME_TYPE == NENHUM_AINDA){
       dbug msg(F("Não existe TIME_TYPE ainda, será selecionado agora"));
+      dbug delay(400);
       pick_time_type(); //Seleciona se quer o modo escolher minutos, horas, dias, quinzenas
+      dbug delay(400);
     }
     else{
       msg(F("Um modo tempo foi selecionado"));
+      dbug delay(400);
       modos_config(); //Seleciona o número de minutos, horas, dias, quinzenas.
       msg(F("Após a função confirm_request concluir, sairá do modo CONFIG"));
+      dbug delay(400);
     }
     
     vezes_apertadas = 0; //redundancia

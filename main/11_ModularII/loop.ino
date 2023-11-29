@@ -52,6 +52,7 @@ void loop() {
   else if (MODO == TIME){
 
     if (first_time){  //seja gentil
+      
       dbug msg (F("modo TIME"));
       first_time = false;
     }
