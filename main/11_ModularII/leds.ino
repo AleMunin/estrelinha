@@ -197,7 +197,7 @@ void brilho_intensidade(){
   dbug msg("Brilho max agora é " + str(brilho_pwm) + " e " + str (brilho_ino));
   msg ("Brilho = " + str(modo_brilho));
 
-  dbug delay(5000);
+  dbug delay(500);
 
 }
 

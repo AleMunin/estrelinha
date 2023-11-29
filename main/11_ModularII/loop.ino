@@ -25,13 +25,14 @@ void loop() {
     // Ordem dos botões
     if (first_config){  //Garante que não vai haver problema com as condicionais.
 
-      bip basic_buzz(500);
       desliga_todos();
+      dbug msg(F("O modo config foi rodado pela primeira vez"));
+      bip mode_buzz(200);
+      dbug delay(300);
       first_config = false;
       TIME_TYPE = NENHUM_AINDA; // proibe o submenu de agir.
       cont = 0;
       vezes_apertadas = 0;
-      dbug msg(F("O modo config foi rodado pela primeira vez"));
     }
     
     //---- FIX: ------: push_count(); // Checa se precisa resetar o estado de contagem, ou adicionar nela
@@ -52,8 +53,14 @@ void loop() {
   else if (MODO == TIME){
 
     if (first_time){  //seja gentil
-      
+      delay(300);
+      mode_buzz(100);
+      mode_buzz(200);
+      mode_buzz(400);
+
+
       dbug msg (F("modo TIME"));
+      dbug delay(200);
       first_time = false;
     }
     // debug_request(); //em modo debug, emula o chamado da moedeira para código abaixo.
@@ -68,7 +75,7 @@ void loop() {
       liga_aleatorio(); //Liga um ou reseta tempo do led mais antigo.
     }
     time_loop();
-  
+    ledbug delay(400);
   }
   else if (MODO == TEST){
 
