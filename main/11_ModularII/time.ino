@@ -23,6 +23,7 @@ void time_end(short row, short col){
     post_solo_return;
     desliga_led(row,col);
     xelor(row,col,false);
+   
   }
   //led_ligado[row][col] = false; //xelor does that
   
@@ -85,7 +86,7 @@ void contagem(short row, short col){
     msg (led_timer[row][col]);
     tbug msg ( "O led ["  + printLed +"] foi considerado ligado, millis: " + str(led_timer[row][col]) + " de " + str(tempo_max));
   
-    delay(5000);
+    dbug delay(1000);
   }
 
 }

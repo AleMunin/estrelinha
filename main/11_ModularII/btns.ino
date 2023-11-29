@@ -96,16 +96,16 @@ void confirm_request(){
     
     if (TIME_TYPE == NENHUM_AINDA){
       dbug msg(F("Não existe TIME_TYPE ainda, será selecionado agora"));
-      dbug delay(400);
+      dbug delay(00);
       pick_time_type(); //Seleciona se quer o modo escolher minutos, horas, dias, quinzenas
-      dbug delay(400);
+      dbug delay(1000);
     }
     else{
       msg(F("Um modo tempo foi selecionado"));
       dbug delay(400);
       modos_config(); //Seleciona o número de minutos, horas, dias, quinzenas.
       msg(F("Após a função confirm_request concluir, sairá do modo CONFIG"));
-      dbug delay(400);
+      dbug delay(1000);
     }
     
     vezes_apertadas = 0; //redundancia

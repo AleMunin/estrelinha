@@ -14,8 +14,11 @@ void loop() {
   moedeira_loop(); //Funciona uma vez, em qualquer modo.
 
   if (creditos > 0) { 
-    delay(5000);
-    liga_aleatorio();     
+    dbug delay(5000);
+    //liga_aleatorio();
+    if (MODO == TIME) {
+      MOEDEIRA_OK = true;
+    }
     novaMoeda = false;
     creditos = 0;
   }		
@@ -26,7 +29,7 @@ void loop() {
     if (first_config){  //Garante que não vai haver problema com as condicionais.
 
       desliga_todos();
-      dbug msg(F("O modo config foi rodado pela primeira vez"));
+      msg(F("O modo config foi rodado pela primeira vez"));
       bip mode_buzz(200);
       dbug delay(300);
       first_config = false;
@@ -55,12 +58,14 @@ void loop() {
     if (first_time){  //seja gentil
       delay(300);
       mode_buzz(100);
+      delay(60);
       mode_buzz(200);
-      mode_buzz(400);
+      delay(60);
+      mode_buzz(300);
 
 
-      dbug msg (F("modo TIME"));
-      dbug delay(200);
+      msg (F("modo TIME"));
+      delay(200);
       first_time = false;
     }
     // debug_request(); //em modo debug, emula o chamado da moedeira para código abaixo.

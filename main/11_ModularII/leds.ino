@@ -42,7 +42,7 @@ void liga_aleatorio(){
     while_count = 0; // existe só para debugs
     ledbug msg (F("Um led será selecionado aleatóriamente"));  
     do{
-      ledbug  delay(2000);
+      ledbug  delay(1500);
       if (TODOS_LIGADOS) break; //improvavel mas por precaução
 
       row_while = random(n_pca);
@@ -53,7 +53,7 @@ void liga_aleatorio(){
         delay (1000);
         msg ("ROW ON WHILE LOOP IS..." + str(row_while));
         msg ("COL ON WHILE LOOP IS..." + str(col_while));
-        delay (4000);
+        delay (2000);
         msg("");
       }
       ledbug {
