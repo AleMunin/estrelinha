@@ -12,6 +12,14 @@ void loop() {
   brilho_request(); //checa se quer alterar o modo brilho e altera direto, em qualquer outro modo, incluindo teste 
 
   moedeira_loop(); //Funciona uma vez, em qualquer modo.
+
+  if (creditos > 0) { 
+    delay(5000);
+    liga_aleatorio();     
+    novaMoeda = false;
+    creditos = 0;
+  }		
+
   
   if (MODO == CONFIG){
     // Ordem dos botões
@@ -80,7 +88,7 @@ void loop() {
 
       dbug {
         loop_test++;
-        //delay(1000);
+        delay(1000);
       }
 
     } // switch modo teste

@@ -15,6 +15,8 @@ void setup() {
 
   
   moedeira_setup();
+  // attachInterrupt(digitalPinToInterrupt(moedeira), moedaInserida, RISING);
+
 
   pinMode(buzzer_pin, OUTPUT);
   bip bip_me;

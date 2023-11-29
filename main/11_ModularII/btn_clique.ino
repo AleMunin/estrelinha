@@ -1,5 +1,5 @@
 #define btn_tempo 5
-#define btn_brilho 6
+#define btn_brilho 4
 #define btn_confirma 7
 
 #define ledVermelho 9

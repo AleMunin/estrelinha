@@ -1,4 +1,4 @@
-#define buzzer_pin 1 //originalmente 2
+#define buzzer_pin 6 //originalmente 2
 
 void basic_buzz(short tempo){ //Buzz basico
   if (!BEEP) return;
