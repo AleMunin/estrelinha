@@ -37,4 +37,7 @@ void setup() {
     msg (F("Saindo do setup"));
     msg("");
   }
+
+  bip basic_buzz(1000);
+  delay(1000);
 }

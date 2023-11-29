@@ -24,6 +24,8 @@ void loop() {
   if (MODO == CONFIG){
     // Ordem dos botões
     if (first_config){  //Garante que não vai haver problema com as condicionais.
+
+      bip basic_buzz(500);
       desliga_todos();
       first_config = false;
       TIME_TYPE = NENHUM_AINDA; // proibe o submenu de agir.
@@ -43,6 +45,8 @@ void loop() {
         msg(F("Saíndo do modo CONFIG"));
         msg("");
       }
+      delay(500);
+      bip basic_buzz(1000);
     }
   }
   else if (MODO == TIME){
