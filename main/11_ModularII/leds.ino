@@ -26,7 +26,11 @@ void desliga_led(short row, short col){
 
 
 void liga_aleatorio(){
-  if (!btn_liga) return; //Se o sinal do botão n foi apertado
+  //if (!btn_liga) return; //Se o sinal do botão n foi apertado
+  
+  dbug msg(F("liga aleatorio rodou"));
+  dbug delay(1000);
+  
   if (TODOS_LIGADOS){
     ledbug msg(F("liga_aleatorio: todos os leds já estão ligados"));
     mantem_ligado();
