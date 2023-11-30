@@ -45,8 +45,15 @@ void liga_aleatorio(){
       ledbug  delay(1500);
       if (TODOS_LIGADOS) break; //improvavel mas por precaução
 
-      row_while = random(n_pca);
+      if (!solo_led) {
+        row_while = random(0, n_pca);
+      }
+      else{
+        row_while = random(0, n_pca-1);
+      }
+      if row_while > 2
       col_while = random(n_led);
+
       dbug{
         msg("");
         msg ("STOP EVERYTHING");
@@ -56,10 +63,10 @@ void liga_aleatorio(){
         delay (2000);
         msg("");
       }
-      ledbug {
-        msg("While loop = " + str(while_count + 0));
-        while_count++;
-      }
+      
+      msg("While loop = " + str(while_count + 0));
+      while_count++;
+
       solo_skip_while; //previne os leds fantasmas se solo_led = true; N é logado em loops
 
       ledbug msg("dbug de led passou solo skip, [" + printLed +"]");
@@ -72,10 +79,40 @@ void liga_aleatorio(){
       }
       else {
         ledbug msg("O while rodará novamente pois o led já está ligado, ["+str(row_while)+"]["+str(col_while)+"]");
+        
+        if (while_count > 12){ // se levou muito tempo
+
+          for_row{
+            if (achou) break;
+            for_col{
+              dbug bip bip_me;
+              msg(F(""));
+              msg(F(""));
+              msg(F("Time out, o led será ligado por ordem crescente"));
+              msg(F(""));
+              msg(F(""));
+
+              if (!led_ligado[row][col]){
+                msg("Led ascendido = [" + str(row) + "][" + str(col) + "]");
+                msg(F(""));
+                msg(F(""));
+
+                time_start(row_while,col_while); //liga led e aciona timer
+                xelor(row_while,col_while,true);
+                achou = true; //encerra o loop
+                break;
+              }
+            }
+          }
+        }
         continue;
       }
+
+      
     }
     while(!achou);
+
+    
   }
 }
 
