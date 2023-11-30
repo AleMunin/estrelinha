@@ -45,8 +45,17 @@ void liga_aleatorio(){
       ledbug  delay(1500);
       if (TODOS_LIGADOS) break; //improvavel mas por precaução
 
-      row_while = random(n_pca);
-      col_while = random(n_led);
+      if (solo_led){
+        row_while = random(n_pca-1);
+      }
+      else{
+        row_while = random(n_pca);
+      }
+
+      if (row_while == 2) col_while = 0;
+      else col_while = random(n_led);
+
+
 
       dbug{
         msg("");
@@ -128,6 +137,31 @@ void checa_todos_ligados(){
     else msg(F("Todos os leds estão ligados"));
   }
   TODOS_LIGADOS = tudo_ligado;
+}
+
+void auditoria_de_leds(){
+  /* há alguns leds que simplesmente falharam a contagem e se desligaram.
+    eles ficam ligados eternamente mesmo com o catálogo desligado.
+    Isso força um reset periódicamente
+  */
+
+
+  if (audit > DOIS_MINUTOS_M){ //impreciso, mas irrelevante
+    audit++;
+  }
+  else{
+
+    msg(F("Auditoria de leds começou"));
+
+    for_row{
+      for_col{
+        if(!led_ligado[row][col]){
+          time_end(row,col);
+        }
+      }
+    }
+    audit = 0;
+  }
 }
 
 void muda_modo_brilho(){

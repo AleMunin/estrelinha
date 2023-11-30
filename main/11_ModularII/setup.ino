@@ -23,7 +23,7 @@ void setup() {
   short col = 0;
   short row = 0;
 
-  if (!solo_led) n_pca--; //emula o solo led como uma placa para os loops
+  if (solo_led) n_pca++;
 
   setup_btn_clique ();
   

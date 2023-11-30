@@ -42,6 +42,8 @@ short bti=0;
 
 int loop_test = 0;
 
+int audit = 0;
+
 // Contadores
 bool TODOS_LIGADOS = false;
 bool led_ligado[2][15] = {{false}}; //a range da array nunca é alterada em nenhum teste

@@ -15,9 +15,9 @@ void loop() {
 
   if (creditos > 0) { 
     dbug delay(5000);
-    //liga_aleatorio();
     if (MODO == TIME) {
-      MOEDEIRA_OK = true;
+      //MOEDEIRA_OK = true; //depreciado
+      liga_aleatorio();
     }
     novaMoeda = false;
     creditos = 0;
@@ -72,14 +72,15 @@ void loop() {
 
     checa_todos_ligados(); 
 
-    if ( (MOEDEIRA_OK) || (btn_liga)){  //se foi recebido um sinal da moedeira ou botao de testes
+    // if ( (MOEDEIRA_OK) || (btn_liga)){  //se foi recebido um sinal da moedeira ou botao de testes
 
-      MOEDEIRA_OK = false; // reseta estado.
-      btn_liga = false;
+    //   MOEDEIRA_OK = false; // reseta estado.
+    //   btn_liga = false;
 
-      liga_aleatorio(); //Liga um ou reseta tempo do led mais antigo.
-    }
+    //   liga_aleatorio(); //Liga um ou reseta tempo do led mais antigo.
+    // }
     time_loop();
+    auditoria_de_leds(); //previne contagens erradas
     ledbug delay(400);
   }
   else if (MODO == TEST){

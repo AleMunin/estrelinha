@@ -19,12 +19,12 @@ void time_start(short row, short col){  //Liga e cataloga o led como ligado
 }
 
 void time_end(short row, short col){
-  if (col < n_led) {
-    post_solo_return;
-    desliga_led(row,col);
-    xelor(row,col,false);
+  //if (col < n_led) { //segurança desnecessária
+  post_solo_return;
+  desliga_led(row,col);
+  xelor(row,col,false);
    
-  }
+  //}
   //led_ligado[row][col] = false; //xelor does that
   
 }
