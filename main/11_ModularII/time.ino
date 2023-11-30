@@ -2,10 +2,12 @@ void xelor(short row, short col, bool stat ){ // stat = true liga, false desliga
   if(stat){
     led_ligado[row][col] = true;
     start_time[row][col] = millis();  //Previne problemas com comparação
+    ifTESTE_SOLO solo_ligado = true;
   }
   else{
     led_ligado[row][col] = false;
     start_time[row][col] = 0;
+    ifTESTE_SOLO solo_ligado = false;
   }
   led_timer[row][col] = 0;  //previne comparação no primeiro ciclo, de desligar o led, por usar millis();
 }
@@ -15,6 +17,7 @@ void time_start(short row, short col){  //Liga e cataloga o led como ligado
     post_solo_return;
     lighton liga_led(row, col); //se os leds tão ativados, use isso
     led_ligado[row][col] = true;
+    ifTESTE_SOLO solo_ligado = true;
   //}
 }
 
@@ -77,7 +80,7 @@ void contagem(short row, short col){
   //   led_timer[row][col]++;
   //   tbug msg ( "O led ["  + printLed +"] foi considerado ligado, time++ em " + str(led_timer[row][col]) );
   // }
-  if (led_ligado[row][col]){
+  if ( (led_ligado[row][col]) || ( TESTE_SOLO && (solo_ligado)   )    ){ // prevenção
 
     unsigned long tempo_atual = millis();    
     led_timer[row][col] = millis() - start_time[row][col];  //start_time foi iniciado em xelor

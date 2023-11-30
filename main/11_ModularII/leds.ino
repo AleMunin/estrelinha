@@ -118,7 +118,8 @@ void liga_aleatorio(){
     }
     while(!achou);
     ledbug if (led_ligado[2][0] == true) msg("solo led ligado = true");
-    if (led_ligado[2][0] == false) msg("solo led ligado = FALSEEEEEEEEEEEEEEEEEEE");
+    if (solo_ligado) msg("solo_ligado var = true");
+    else msg("solo_ligado var = false");
     dbug delay(2000);
 
     //this was true until the loop on this function
@@ -129,14 +130,35 @@ void liga_aleatorio(){
 void checa_todos_ligados(){
   bool tudo_ligado = true;
   if (led_ligado[2][0] == true) msg("solo led ligado dentro do checa todos = true");
+    if (solo_ligado) msg("solo_ligado dentro do checa todos = true");
+    else msg("solo_ligado dentro do checa todos = false");
+
+
   dbug delay(2000);
   ledbug msg(F("checa_todos_ligados vai fazer o que deveria"));
   for_row{
     for_col{
       post_solo;
       if (led_ligado[row][col] == false){
-        tudo_ligado = false;
-        ledbug msg("led desligado encontrado [" + printLed + "]");
+
+
+        ifTESTE_SOLO {
+          
+          if (!solo_ligado){
+            tudo_ligado = false;
+            msg(F("led_ligado[2][0] foi avaliado como falso e solo_ligado confirmou"));
+          }
+          else{
+            msg(F("led_ligado foi avaliado como falso, mas a prevenção corrigiu a função"));
+            // é ridiculo que eu tenha que fazer isso
+            dbug delay(2000);
+          }
+        }
+        else{
+          tudo_ligado = false;
+        }
+        
+        ledbug msg("led desligado encontrado [" + printLed + "]"); //ignore o comentário do [2][0] enquanto prevenção é usada
       }
     }
     
@@ -148,7 +170,9 @@ void checa_todos_ligados(){
   TODOS_LIGADOS = tudo_ligado;
 }
 
-void auditoria_de_leds(){
+void auditoria_de_leds(){ // não funciona com prevenção solo_led, evite usar
+
+
   /* há alguns leds que simplesmente falharam a contagem e se desligaram.
     eles ficam ligados eternamente mesmo com o catálogo desligado.
     Isso força um reset periódicamente

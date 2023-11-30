@@ -50,6 +50,11 @@ volatile bool led_ligado[2][15] = {{false}}; //a range da array nunca é alterad
 volatile unsigned long led_timer[2][15] = {{0}}; // elas são estáticas e os loops cortam antes de dar problema
 volatile unsigned long start_time[2][15] = {{0}}; // Evita um problema de comparação 
 
+volatile bool solo_ligado = false; //teste de memória
+#define ifTESTE_SOLO if((row==2)&&(col==0))
+#define TESTE_SOLO ((row==2)&&(col==0))
+
+
 // Estados
 
 bool btn_liga = false;
