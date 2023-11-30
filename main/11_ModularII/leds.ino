@@ -74,7 +74,7 @@ void liga_aleatorio(){
 
       ledbug msg("dbug de led passou solo skip, [" + str(row_while) + "][" + str(col_while) +"]");
       
-      if (!led_ligado[row_while][col_while]){ //se o led tá desligado
+      if ( (!led_ligado[row_while][col_while]) || ((row_while==2)&&(col_while==0) && (!solo_ligado)) ) { //se o led tá desligado
         ledbug msg("O led [" + str(row_while) + "][" + str(col_while)  +"] foi selecionado aleatoriamente");
         time_start(row_while,col_while); //liga led e aciona timer
         xelor(row_while,col_while,true);
@@ -95,7 +95,8 @@ void liga_aleatorio(){
               msg(F(""));
               msg(F(""));
 
-              if (!led_ligado[row][col]){
+              if ((!led_ligado[row][col]) || TST_SOLO_DESLIGADO ){ 
+                    //prevenção pode ser um erro aqui. Mas por outro lado ele é o ultimo led mesmo.
                 msg("Led ascendido = [" + str(row) + "][" + str(col) + "]");
                 msg(F(""));
                 msg(F(""));
@@ -250,7 +251,7 @@ void religa_em_modo_brilho(){
         delay(500);
       }
       post_solo;
-      if(led_ligado[row][col]) liga_led(row,col);
+      if( (led_ligado[row][col]) || TST_SOLO_LIGADO) liga_led(row,col);
     }
   }
 }

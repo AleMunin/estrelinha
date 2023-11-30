@@ -53,6 +53,9 @@ volatile unsigned long start_time[2][15] = {{0}}; // Evita um problema de compar
 volatile bool solo_ligado = false; //teste de memória
 #define ifTESTE_SOLO if((row==2)&&(col==0))
 #define TESTE_SOLO ((row==2)&&(col==0))
+#define TST_SOLO_LIGADO ((row==2)&&(col==0) && (solo_ligado))
+#define TST_SOLO_DESLIGADO ((row==2)&&(col==0) && (!solo_ligado))
+
 
 
 // Estados

@@ -56,7 +56,7 @@ void mantem_ligado(){
   for_row{
     for_col{
       post_solo;
-      if(!led_ligado[row][col]) continue; //se led tá desligado ignore
+      if ( (!led_ligado[row][col]) || TST_SOLO_DESLIGADO ) continue; //se led tá desligado ignore
       
       if ( led_timer[row][col] > maior_tempo_ligado){
           maior_tempo_ligado = led_timer[row][col];

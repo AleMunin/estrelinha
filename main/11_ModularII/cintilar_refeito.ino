@@ -66,7 +66,7 @@ void cintilar_loop() {
       //post_solo; //Esse não é necessário para esse código. Em teoria.
       short led = random((n_led - 1)); // seleciona um led aleatório, em cada um.
       
-      if (led_ligado[row][led]){
+      if (led_ligado[row][led] || TST_SOLO_LIGADO){
       
         if ((row==(n_pca-1)) && (solo_led) &&(col==0)) {
           short reduzir = random(brilho_ino/3);
