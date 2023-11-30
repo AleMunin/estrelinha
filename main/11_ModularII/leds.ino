@@ -53,7 +53,7 @@ void liga_aleatorio(){
       }
 
       if (row_while == 2) col_while = 0;
-      else col_while = random(n_led);
+      else col_while = random(n_led-1);
 
 
 
