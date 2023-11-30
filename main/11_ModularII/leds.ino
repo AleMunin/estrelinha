@@ -88,6 +88,8 @@ void liga_aleatorio(){
           for_row{
             if (achou) break;
             for_col{
+              if (achou) break;
+
               dbug bip bip_me;
               msg(F(""));
               msg(F(""));
@@ -192,7 +194,7 @@ void auditoria_de_leds(){ // não funciona com prevenção solo_led, evite usar
 
     for_row{
       for_col{
-        if(!led_ligado[row][col]){
+        if((!led_ligado[row][col]) || TST_SOLO_DESLIGADO ){
           time_end(row,col);
         }
       }
