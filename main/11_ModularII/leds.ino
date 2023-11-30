@@ -103,7 +103,7 @@ void liga_aleatorio(){
                 time_start(row,col); //liga led e aciona timer
                 xelor(row,col,true);
 
-                ledbug if (led_ligado[2][0]) msg("solo led ligado = true");
+                ledbug if (led_ligado[2][0] == true) msg("solo led ligado = true");
                 dbug delay(2000);
                 achou = true; //encerra o loop
                 break;
@@ -117,7 +117,8 @@ void liga_aleatorio(){
       
     }
     while(!achou);
-    ledbug if (led_ligado[2][0]) msg("solo led ligado = true");
+    ledbug if (led_ligado[2][0] == true) msg("solo led ligado = true");
+    if (led_ligado[2][0] == false) msg("solo led ligado = FALSEEEEEEEEEEEEEEEEEEE");
     dbug delay(2000);
 
     //this was true until the loop on this function
@@ -127,13 +128,13 @@ void liga_aleatorio(){
 
 void checa_todos_ligados(){
   bool tudo_ligado = true;
-  ledbug if (led_ligado[2][0]) msg("solo led ligado dentro do checa todos = true");
+  if (led_ligado[2][0] == true) msg("solo led ligado dentro do checa todos = true");
   dbug delay(2000);
   ledbug msg(F("checa_todos_ligados vai fazer o que deveria"));
   for_row{
     for_col{
       post_solo;
-      if (!led_ligado[row][col]){
+      if (led_ligado[row][col] == false){
         tudo_ligado = false;
         ledbug msg("led desligado encontrado [" + printLed + "]");
       }
