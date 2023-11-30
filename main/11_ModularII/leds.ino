@@ -119,6 +119,8 @@ void liga_aleatorio(){
     while(!achou);
     ledbug if (led_ligado[2][0]) msg("solo led ligado = true");
     dbug delay(2000);
+
+    //this was true until the loop on this function
     checa_todos_ligados(); // precisa ser checado imediatamente devido ao interrupt
   }
 }
