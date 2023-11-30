@@ -72,10 +72,10 @@ void liga_aleatorio(){
 
       solo_skip_while; //previne os leds fantasmas se solo_led = true; N é logado em loops
 
-      ledbug msg("dbug de led passou solo skip, [" + printLed +"]");
+      ledbug msg("dbug de led passou solo skip, [" + str(row_while) + "][" + str(col_while) +"]");
       
       if (!led_ligado[row_while][col_while]){ //se o led tá desligado
-        ledbug msg("O led [" + printLed +"] foi selecionado aleatoriamente");
+        ledbug msg("O led [" + str(row_while) + "][" + str(col_while)  +"] foi selecionado aleatoriamente");
         time_start(row_while,col_while); //liga led e aciona timer
         xelor(row_while,col_while,true);
         achou = true; //encerra o loop
@@ -115,7 +115,7 @@ void liga_aleatorio(){
     }
     while(!achou);
 
-    
+    checa_todos_ligados(); // precisa ser checado imediatamente devido ao interrupt
   }
 }
 
