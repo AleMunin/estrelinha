@@ -45,13 +45,7 @@ void liga_aleatorio(){
       ledbug  delay(1500);
       if (TODOS_LIGADOS) break; //improvavel mas por precaução
 
-      if (!solo_led) {
-        row_while = random(0, n_pca);
-      }
-      else{
-        row_while = random(0, n_pca-1);
-      }
-      if row_while > 2
+      row_while = random(n_pca);
       col_while = random(n_led);
 
       dbug{
