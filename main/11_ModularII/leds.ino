@@ -100,8 +100,8 @@ void liga_aleatorio(){
                 msg(F(""));
                 msg(F(""));
 
-                time_start(row_while,col_while); //liga led e aciona timer
-                xelor(row_while,col_while,true);
+                time_start(row,col); //liga led e aciona timer
+                xelor(row,col,true);
                 achou = true; //encerra o loop
                 break;
               }
@@ -146,12 +146,15 @@ void auditoria_de_leds(){
   */
 
 
-  if (audit > DOIS_MINUTOS_M){ //impreciso, mas irrelevante
+  if (audit < DOIS_MINUTOS_M){ //impreciso, mas irrelevante
     audit++;
+    dbug msg("audit " + str(audit) + " / " + str(DOIS_MINUTOS_M));
   }
   else{
-
+    msg(F("||||||||||||||||||||"));
     msg(F("Auditoria de leds começou"));
+    msg(F("||||||||||||||||||||"));
+    dbug delay(3000);
 
     for_row{
       for_col{

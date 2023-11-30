@@ -11,15 +11,17 @@ void xelor(short row, short col, bool stat ){ // stat = true liga, false desliga
 }
 
 void time_start(short row, short col){  //Liga e cataloga o led como ligado
-  if (col < n_led) {
+  //if (col < n_led) { //segurança desnecessária
     post_solo_return;
     lighton liga_led(row, col); //se os leds tão ativados, use isso
     led_ligado[row][col] = true;
-  }
+  //}
 }
 
 void time_end(short row, short col){
   //if (col < n_led) { //segurança desnecessária
+
+  //ledbug msg("Time e")
   post_solo_return;
   desliga_led(row,col);
   xelor(row,col,false);
