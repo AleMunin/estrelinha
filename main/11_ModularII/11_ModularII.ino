@@ -46,9 +46,9 @@ int audit = 0;
 
 // Contadores
 bool TODOS_LIGADOS = false;
-volatile bool led_ligado[2][15] = {{false}}; //a range da array nunca é alterada em nenhum teste
-volatile unsigned long led_timer[2][15] = {{0}}; // elas são estáticas e os loops cortam antes de dar problema
-volatile unsigned long start_time[2][15] = {{0}}; // Evita um problema de comparação 
+volatile bool led_ligado[3][16] = {{false}}; //a range da array nunca é alterada em nenhum teste
+volatile unsigned long led_timer[3][16] = {{0}}; // elas são estáticas e os loops cortam antes de dar problema
+volatile unsigned long start_time[3][16] = {{0}}; // Evita um problema de comparação 
 
 volatile bool solo_ligado = false; //teste de memória
 #define ifTESTE_SOLO if((row==2)&&(col==0))
@@ -93,7 +93,7 @@ unsigned long millis_anterior = 0;  // registra o tempo que levou para ser apert
 //loops
 
 #define for_row for(row=0;row<n_pca;row++)
-#define for_col for(col=0;col<n_led;col++)
+#define for_col for(col=0;col<16;col++)
 #define for_btn for(bti=0;bti<btn_num;bti++)
 
 #define printLed str(row)+"]["+str(col) 

@@ -79,6 +79,10 @@ void loop() {
 
     //   liga_aleatorio(); //Liga um ou reseta tempo do led mais antigo.
     // }
+
+
+//    cintilar_loop();
+
     time_loop();
     //auditoria_de_leds(); //previne contagens erradas, n funciona com solo_led ainda
     ledbug delay(400);
