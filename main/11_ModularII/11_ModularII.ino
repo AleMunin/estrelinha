@@ -31,6 +31,8 @@ bool DEBUG_ROW = false;
 bool DEBUG_COL = false;
 bool DEBUG_EYEBLESS = false;
 bool BEEP = true;
+bool NO_DELAY = false;  //to the delays on debugs
+
 
 bool FAKE_BTN = true;
 
@@ -85,6 +87,7 @@ unsigned long millis_anterior = 0;  // registra o tempo que levou para ser apert
 #define colbug if (DEBUG_COL)
 #define lighton if(!DEBUG_EYEBLESS)
 #define lightoff if(DEBUG_EYEBLESS)
+#define nd if(!NO_DELAY)
 
 #define msg Serial.println
 #define str String

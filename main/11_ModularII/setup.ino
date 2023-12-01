@@ -39,5 +39,6 @@ void setup() {
   }
 
   bip basic_buzz(1000);
-  delay(1000);
+  nd delay(1000);
+  else delay(400);
 }

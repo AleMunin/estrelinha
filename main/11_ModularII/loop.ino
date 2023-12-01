@@ -49,7 +49,7 @@ void loop() {
         msg(F("Saíndo do modo CONFIG"));
         msg("");
       }
-      delay(500);
+      dbug delay(500);
       bip basic_buzz(1000);
     }
   }
@@ -65,7 +65,7 @@ void loop() {
 
 
       msg (F("modo TIME"));
-      delay(200);
+      nd delay(200);
       first_time = false;
     }
     // debug_request(); //em modo debug, emula o chamado da moedeira para código abaixo.
@@ -81,7 +81,7 @@ void loop() {
     // }
 
 
-//    cintilar_loop();
+    cintilar_loop();
 
     time_loop();
     //auditoria_de_leds(); //previne contagens erradas, n funciona com solo_led ainda
@@ -115,6 +115,9 @@ void loop() {
 
     } // switch modo teste
 
+
+    //cintilar_loop();
+  
   } // if modo teste
   
   

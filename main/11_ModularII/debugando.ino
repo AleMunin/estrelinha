@@ -6,6 +6,7 @@ void bug(){
     DEBUG_ROW = false;
     DEBUG_COL = false;
     DEBUG_EYEBLESS = false;
+    NO_DELAY = true;
   }
   else{
     dbug msg (F("DEBUG = TRUE"));
@@ -15,6 +16,7 @@ void bug(){
     colbug msg (F("DEBUG-COL = TRUE"));
     lighton msg(F("Os leds estão ligados"));
     lightoff msg (F("Leds estão desligados para saúde visual"));
+    nd msg (F("NO_DELAY = TRUE"));
   }
 }
 
@@ -106,10 +108,10 @@ void fake_liga_chance(){  //Aperta o botão falso aleatóriamente
 void boot(){ //Desliga e liga todos os leds, deixa todos ligados no final para testar.
   msg(F("Boot, all leds"));
   liga_todos();
-  delay(3000);
+  delay(2000);
   msg (F("Desligando os leds"));
   desliga_todos();
-  delay(3000);
+  delay(2000);
   msg (F("Ligando os leds novamente"));
   liga_todos();
 }

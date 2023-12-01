@@ -250,7 +250,7 @@ void religa_em_modo_brilho(){
       if ((row == 2) && (col == 0)){
         if(led_ligado[row][col]) msg(F("solo led está ligado em rebrilho"));
         else msg(F("Solo led está desligado em rebrilho"));
-        delay(500);
+        dbug delay(500);
       }
       post_solo;
       if( (led_ligado[row][col]) || TST_SOLO_LIGADO) liga_led(row,col);
@@ -340,7 +340,8 @@ void liga_todos(){
     for_col{
       post_solo;
       time_start(row,col);
-      delay(300);
+      nd delay(300);
+      else delay(150);
     }
   }
 }
@@ -351,7 +352,8 @@ void desliga_todos(){
       post_solo;
       time_end(row,col);
       //time_start(row,col);
-      delay(300);
+      nd delay(300);
+      else delay(150);
     }
   }
 }
