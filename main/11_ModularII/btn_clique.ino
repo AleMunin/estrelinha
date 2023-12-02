@@ -49,6 +49,20 @@ void verde () {
   digitalWrite(ledVerde, HIGH);
 }
 
+
+short debug_delay = 1;
+// bool debug_skip = false;
+
+void loop_delay(){ // tentativa para evitar o problema com botões no debug = false;
+  dbug return; // não roda no modo debug = false;
+  debug_delay++;
+  if (debug_delay > 35){
+    delay(400);
+    debug_delay = 1;
+  }
+}
+
+
 void loop_clique () {
 
   // msg("loop BTN CLIQUE");

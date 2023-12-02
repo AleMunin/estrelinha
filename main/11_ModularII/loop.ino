@@ -5,6 +5,7 @@ void loop() {
   msg(F("------------------ "));
   msg(F(" "));
 
+  if (MODO == TIME) loop_delay();
   loop_clique(); // talvez precise de uma array de delay
   
   config_request(); //Checa se quer o modo config
@@ -80,9 +81,9 @@ void loop() {
     //   liga_aleatorio(); //Liga um ou reseta tempo do led mais antigo.
     // }
 
-
-    cintilar_loop();
-
+    if (debug_delay % 2 == 0){ // Faz rodar em um loop, e em outro n.
+      cintilar_loop();
+    }
     time_loop();
     //auditoria_de_leds(); //previne contagens erradas, n funciona com solo_led ainda
     ledbug delay(400);

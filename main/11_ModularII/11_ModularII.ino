@@ -24,7 +24,7 @@ int btn_liga_last = LOW;
 int btn_liga_now;
 
 
-const bool DEBUG = true; // Se falso, todos os outros debugs são falsos
+const bool DEBUG = false; // Se falso, todos os outros debugs são falsos
 bool DEBUG_LED = true; // debug para funções de led
 bool DEBUG_TIME = true;
 bool DEBUG_ROW = false;
