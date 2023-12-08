@@ -73,6 +73,10 @@ void loop() {
 
     checa_todos_ligados(); 
 
+    // if (quantos_ligados > 6) {
+    //   msg("quantos_ligados maior que 6");
+    //   delay(3000);
+    // }
     // if ( (MOEDEIRA_OK) || (btn_liga)){  //se foi recebido um sinal da moedeira ou botao de testes
 
     //   MOEDEIRA_OK = false; // reseta estado.
@@ -102,10 +106,11 @@ void loop() {
 
       case TESTE_ATUAL: // atualmente testando o que a rotina do modo tempo vai ser
         if (!ja_bootou){  //Previne de bootar todo ciclo
-          boot();
+          //boot();
+          liga_todos();
           ja_bootou = true;
         }
-      //cintilar_loop();  
+      cintilar_loop();  
         
       break; //------------------------------------------------
 

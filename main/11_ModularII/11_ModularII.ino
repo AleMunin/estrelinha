@@ -47,6 +47,8 @@ int loop_test = 0;
 int audit = 0;
 
 // Contadores
+short quantos_ligados = 0; //deveria ter sido feito a muito tempo atrás
+
 bool TODOS_LIGADOS = false;
 volatile bool led_ligado[3][16] = {{false}}; //a range da array nunca é alterada em nenhum teste
 volatile unsigned long led_timer[3][16] = {{0}}; // elas são estáticas e os loops cortam antes de dar problema

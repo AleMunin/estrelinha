@@ -37,7 +37,14 @@
 
 */
 
+bool devo_cintilar(){
+  
+  // if (quantos_ligados == 0) return false;
 
+  // else if (quantos_ligados )
+  
+  // else return false;
+}
 void cintilar_loop() { 
   /* Na lógica original, o loop rodava 1x pelos leds do (um for de 16)
     e rodava um loop aleatório de 16.
@@ -64,16 +71,23 @@ void cintilar_loop() {
     
     for_col{
       //post_solo; //Esse não é necessário para esse código. Em teoria.
+
+
       short led = random((n_led - 1)); // seleciona um led aleatório, em cada um.
       
       if (led_ligado[row][led] || TST_SOLO_LIGADO){
-      
+        if (quantos_ligados < 15) {
+          if (random(10) > 2 ) continue; // 30% de chance
+        }
+        else{
+          if (random(10) > 1 ) continue; // 30% de chance
+        }
         if ((row==(n_pca-1)) && (solo_led) &&(col==0)) {
           short reduzir = random(brilho_ino/3);
           short cintilar = random((brilho_ino * 0.75),brilho_ino);
           analogWrite(porta_led, cintilar);
 
-          delay(50);
+          delay(random(30,80));
 
           analogWrite(porta_led, reduzir);
 
@@ -85,8 +99,7 @@ void cintilar_loop() {
           short cintilar = random((brilho * 0.75), brilho);  // aleatoriza numeros de 3071.25 até 4095
 
           pwm[row].setPWM(led, 0, cintilar);
-          delay(50);
-
+          delay(random(30,80));
           pwm[row].setPWM(led, 0, reduzir);
         }
 

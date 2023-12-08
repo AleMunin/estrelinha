@@ -131,6 +131,7 @@ void liga_aleatorio(){
 }
 
 void checa_todos_ligados(){
+  quantos_ligados = 0;
   bool tudo_ligado = true;
   if (led_ligado[2][0] == true) msg("solo led ligado dentro do checa todos = true");
     if (solo_ligado) msg("solo_ligado dentro do checa todos = true");
@@ -154,7 +155,7 @@ void checa_todos_ligados(){
           else{
             msg(F("led_ligado foi avaliado como falso, mas a prevenção corrigiu a função"));
             // é ridiculo que eu tenha que fazer isso
-            dbug delay(2000);
+            //dbug delay(2000);
           }
         }
         else{
@@ -162,6 +163,9 @@ void checa_todos_ligados(){
         }
         
         ledbug msg("led desligado encontrado [" + printLed + "]"); //ignore o comentário do [2][0] enquanto prevenção é usada
+      }
+      else{
+        quantos_ligados++;
       }
     }
     
